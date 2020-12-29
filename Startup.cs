@@ -35,7 +35,13 @@ namespace NameBandit
             
             services. AddCors(c =>
             {
-               c. AddPolicy("AllowOrigin", options => options. AllowAnyOrigin());
+                c.AddPolicy(
+                name: "AllowOrigin",
+                builder =>{
+                    builder.AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader();
+                });
             });
         }
 
@@ -52,6 +58,8 @@ namespace NameBandit
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowOrigin");
 
             app.UseAuthorization();
 
