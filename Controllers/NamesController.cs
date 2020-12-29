@@ -28,8 +28,16 @@ namespace NameBandit.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Name>>> Get()
         {
-            // Define a LINQ query
             var names = from n in _context.Names select n;
+            
+            return await names.ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Name>>> Search(Name name)
+        {
+
+            var names = from n in _context.Names where n.Id == name.Id select n;
             
             return await names.ToListAsync();
         }
