@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NameBandit.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 
 namespace NameBandit
 {
@@ -28,10 +29,6 @@ namespace NameBandit
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NameBandit", Version = "v1" });
-            });
             
             services. AddCors(c =>
             {
@@ -43,6 +40,10 @@ namespace NameBandit
                             .AllowAnyHeader();
                 });
             });
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                 options.UseMySql(
+                     Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +52,6 @@ namespace NameBandit
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NameBandit v1"));
             }
 
             app.UseHttpsRedirection();
@@ -60,8 +59,6 @@ namespace NameBandit
             app.UseRouting();
 
             app.UseCors("AllowOrigin");
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
