@@ -12,7 +12,9 @@ namespace NameBandit.Data
             : base(options)
             { }
 
-        public DbSet<Name> Names {get; set;}
+        public DbSet<Name> Names { get; set; }
+        
+        public DbSet<Category> Categories { get; set; }
     }
 }   
 
