@@ -11,4 +11,5 @@ public class Name
        public bool Male { get; set; }
        public bool Female { get; set; }
        public bool Active { get; set; }
+       public int Vibration { get; set; }
    }  
