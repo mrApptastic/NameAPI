@@ -15,6 +15,8 @@ namespace NameBandit.Data
         public DbSet<Name> Names { get; set; }
         
         public DbSet<Category> Categories { get; set; }
+        
+        public DbSet<SyncLog> SyncLogs { get; set; }
     }
 }   
 

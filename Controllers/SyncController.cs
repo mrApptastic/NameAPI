@@ -33,8 +33,10 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public ActionResult<string> Sync()
+        public async Task<ActionResult<string>> Sync()
         {          
+            string msg = "";
+
             try {
                 var names = from n in _context.Names select n;
 
@@ -62,12 +64,25 @@ namespace NameBandit.Controllers
                     }
                 }
 
-            _context.SaveChanges();
+                msg = "The synchronization has succesfully been completed!";
+
             } catch (Exception exp) {
-                return "The synchronization has failed with the following exception: " + exp.Message;
+                msg = "The synchronization has failed with the following exception: " + exp.Message;
             }
 
-            return "The synchronization has succesfully been completed!";
+            _context.SyncLogs.Add(new SyncLog() {
+                Id = 0,
+                Date = DateTime.Now,
+                Log = msg
+            });
+
+            try {
+                await _context.SaveChangesAsync();
+            } catch (Exception saveExpt) {
+                msg = "The synchronization has failed with the following exception: " + saveExpt.Message;
+            }            
+
+            return msg;
         }
         
         private static List<Name> ScapeNames(List<Name> theList, string site, bool feminine = false) {
