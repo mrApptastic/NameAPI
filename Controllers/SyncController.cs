@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,9 @@ using NameBandit.Data;
 using HtmlAgilityPack;
 using System.Net;
 using System.Text;
+using System.Web;
 using System.Text.RegularExpressions;
+using OfficeOpenXml;
 
 namespace NameBandit.Controllers
 {
@@ -30,7 +33,7 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public ActionResult<bool> Sync()
+        public ActionResult<string> Sync()
         {          
             try {
                 var names = from n in _context.Names select n;
@@ -40,6 +43,8 @@ namespace NameBandit.Controllers
                 theList = ScapeNames(theList, "http://www.urd.dk/fornavne/drenge.htm");
 
                 theList = ScapeNames(theList, "http://www.urd.dk/fornavne/piger.htm", true);
+
+                // theList = ScapeNames2(theList);
 
                 foreach (var item in theList.OrderBy(x => x.Text)) {
                     item.Vibration = CalculateNameVibration(item.Text);
@@ -59,10 +64,10 @@ namespace NameBandit.Controllers
 
             _context.SaveChanges();
             } catch (Exception exp) {
-                return false;
+                return "The synchronization has failed with the following exception: " + exp.Message;
             }
 
-            return true;
+            return "The synchronization has succesfully been completed!";
         }
         
         private static List<Name> ScapeNames(List<Name> theList, string site, bool feminine = false) {
@@ -112,6 +117,91 @@ namespace NameBandit.Controllers
             }
 
             return theList;
+        }
+
+        private static List<Name> ScapeNames2(List<Name> theList) {
+            // using (WebClient w = new WebClient()) {
+            //     byte[] xls = w.DownloadData("https://familieretshuset.dk/media/1514/alle-godkendte-drengenavne-per-2020-12-09.xls");
+            //     // System.IO.File.WriteAllBytes(@"c:\Temp\Test.xls", xls);
+
+            //     using (MemoryStream uha = new MemoryStream(xls)) {
+            //         using(ExcelPackage ep = new ExcelPackage(uha)) {
+            //             ExcelWorksheet worksheet = ep.Workbook.Worksheets.FirstOrDefault();
+            //         }
+            //     }
+            // }
+
+            List<string> allNames = new List<string>();
+
+            FileInfo boys = new FileInfo(@"c:\Temp\boys.xlsx");
+            using(ExcelPackage ep = new ExcelPackage(boys)) {
+                ExcelWorksheet worksheet = ep.Workbook.Worksheets.FirstOrDefault();
+                if (worksheet != null) {
+                    int rowCount = worksheet.Dimension.End.Row; 
+
+                    for (int row = 1; row < rowCount; row++) {
+                        string value = worksheet.Cells[row, 1].Value.ToString().Trim();
+
+                        if (!theList.Select(x => x.Text).Contains(value)) {
+                            theList.Add(new Name() {
+                                Id = 0,
+                                Text = value,
+                                Male = true, 
+                                Female = false,
+                                Active = true,
+                            });
+                        } else {
+                            var nm = theList.Find(x => x.Text.Contains(value));
+                            if (nm != null) {
+                                nm.Male = true;
+                                nm.Active = true;
+                            }
+                        }
+
+                        allNames.Add(value);
+                    }
+                    
+                }
+            }
+
+            FileInfo girls = new FileInfo(@"c:\Temp\girls.xlsx");
+            using(ExcelPackage ep = new ExcelPackage(girls)) {
+                ExcelWorksheet worksheet = ep.Workbook.Worksheets.FirstOrDefault();
+                if (worksheet != null) {
+                    int rowCount = worksheet.Dimension.End.Row; 
+
+                    for (int row = 1; row < rowCount; row++) {
+                        string value = worksheet.Cells[row, 1].Value.ToString().Trim();
+
+                        if (!theList.Select(x => x.Text).Contains(value)) {
+                            theList.Add(new Name() {
+                                Id = 0,
+                                Text = value,
+                                Male = false, 
+                                Female = true,
+                                Active = true,
+                            });
+                        } else {
+                            var nm = theList.Find(x => x.Text.Contains(value));
+                            if (nm != null) {
+                                nm.Female = true;
+                                nm.Active = true;
+                            }
+                        }
+
+                        allNames.Add(value);
+                    }
+                    
+                }
+            }
+
+            foreach (var name in theList) {
+                if (!allNames.Contains(name.Text)) {
+                    name.Active = false;
+                }
+            }
+
+            return theList;      
         }
 
         private static int CalculateNameVibration (string name) {
