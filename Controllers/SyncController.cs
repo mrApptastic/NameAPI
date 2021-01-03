@@ -15,6 +15,7 @@ using System.Text;
 using System.Web;
 using System.Text.RegularExpressions;
 using OfficeOpenXml;
+using Newtonsoft.Json;
 
 namespace NameBandit.Controllers
 {
@@ -42,11 +43,13 @@ namespace NameBandit.Controllers
 
                 var theList = names.ToList();
 
-                theList = ScapeNames(theList, "http://www.urd.dk/fornavne/drenge.htm");
+                // theList = ScapeNames(theList, "http://www.urd.dk/fornavne/drenge.htm");
 
-                theList = ScapeNames(theList, "http://www.urd.dk/fornavne/piger.htm", true);
+                // theList = ScapeNames(theList, "http://www.urd.dk/fornavne/piger.htm", true);
 
                 // theList = ScapeNames2(theList);
+
+                AddCategories(_context);
 
                 foreach (var item in theList.OrderBy(x => x.Text)) {
                     item.Vibration = CalculateNameVibration(item.Text);
@@ -210,7 +213,7 @@ namespace NameBandit.Controllers
                 }
             }
 
-            foreach (var name in theList) {
+            foreach (Name name in theList) {
                 if (!allNames.Contains(name.Text)) {
                     name.Active = false;
                 }
@@ -218,6 +221,44 @@ namespace NameBandit.Controllers
 
             return theList;      
         }
+
+        private static void AddCategories(ApplicationDbContext db) {
+
+            string ib = System.IO.File.ReadAllText(@"c:\Temp\categories.json");
+            List<Category> adder = JsonConvert.DeserializeObject<List<Category>>(ib);
+   
+            foreach (Category category in adder) {
+                AddCategory(db, category.Title);
+
+                var dbCategory = db.Categories.Where(x => x.Title == category.Title).FirstOrDefault();
+
+                if (dbCategory != null) {
+                    if (dbCategory.Names == null) {
+                        dbCategory.Names = new List<Name>();
+                    }
+                    foreach (Name name in category.Names) {
+                        var dbName = db.Names.Where(x => x.Text == name.Text).FirstOrDefault();
+
+                        if (dbName != null) {
+                            dbCategory.Names.Add(dbName);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        private static void AddCategory(ApplicationDbContext db, string CategoryName) {
+            bool hasCategory = db.Categories.Select(x => x.Title).Contains(CategoryName);
+
+            if (!hasCategory) {
+                db.Categories.Add(new Category() {
+                    Id = 0,
+                    Title = CategoryName,
+                    Names = new List<Name>()
+                });
+            }
+        }        
 
         private static int CalculateNameVibration (string name) {
             int sum = 0;
