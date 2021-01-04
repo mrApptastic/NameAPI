@@ -37,17 +37,17 @@ namespace NameBandit.Controllers
         public async Task<ActionResult<string>> Sync()
         {          
             string msg = "";
-
+  
             try {
                 var names = from n in _context.Names select n;
 
                 var theList = names.ToList();
 
-                // theList = ScapeNames(theList, "http://www.urd.dk/fornavne/drenge.htm");
+                theList = ScapeNames(theList, "http://www.urd.dk/fornavne/drenge.htm");
 
-                // theList = ScapeNames(theList, "http://www.urd.dk/fornavne/piger.htm", true);
+                theList = ScapeNames(theList, "http://www.urd.dk/fornavne/piger.htm", true);
 
-                // theList = ScapeNames2(theList);
+                theList = ScapeNames2(theList);
 
                 AddCategories(_context);
 
@@ -262,7 +262,7 @@ namespace NameBandit.Controllers
 
         private static int CalculateNameVibration (string name) {
             int sum = 0;
-            char[] arr = name.ToUpper().ToCharArray();
+            char[] arr = StringBandit.RemoveAccents(name).ToUpper().ToCharArray();
 
             foreach (char letter in arr) {
                 sum += GetVibrationByLetter(letter);
@@ -304,5 +304,17 @@ namespace NameBandit.Controllers
                 default: return  0;
             }
         }
+    }
+
+    static class StringBandit {
+            public static string RemoveAccents(this string text){     
+            StringBuilder sbReturn = new StringBuilder();     
+            var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();  
+            foreach (char letter in arrayText){     
+                if (System.Globalization.CharUnicodeInfo.GetUnicodeCategory(letter) != System.Globalization.UnicodeCategory.NonSpacingMark)  
+                    sbReturn.Append(letter);     
+            }     
+            return sbReturn.ToString();     
+        } 
     }
 }
