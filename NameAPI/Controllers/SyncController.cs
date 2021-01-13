@@ -237,7 +237,7 @@ namespace NameBandit.Controllers
                         dbCategory.Names = new List<Name>();
                     }
                     foreach (Name name in category.Names) {
-                        var dbName = db.Names.Where(x => x.Text == name.Text).FirstOrDefault();
+                        var dbName = db.Names.Where(x => x.Text == StringBandit.RemoveAccents(name.Text)).FirstOrDefault();
 
                         if (dbName != null) {
                             dbCategory.Names.Add(dbName);
