@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import NameSearch from './components/NameSearch.vue'
+import NameSearch from './components/NameSearch.vue';
 
 export default {
   name: 'App',

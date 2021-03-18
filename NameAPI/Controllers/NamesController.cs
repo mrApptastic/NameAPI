@@ -26,11 +26,23 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Name>>> Get()
+        public async Task<ActionResult<IEnumerable<Name>>> Get(int? vib, int? sex)
         {
             var names = from n in _context.Names select n;
+
+            if (vib > 0) {
+                names = names.Where(x => x.Vibration == vib);
+            }
+
+            if (sex != null) {
+                if (sex == 1) {
+                    names = names.Where(x => x.Female == true);
+                } else if (sex == 0) {
+                    names = names.Where(x => x.Male == true);
+                }
+            }
             
-            return await names.ToListAsync();
+            return await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync();
         }
 
         [HttpPost]
