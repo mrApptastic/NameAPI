@@ -53,5 +53,11 @@ namespace NameBandit.Controllers
             
             return await names.ToListAsync();
         }
+
+        private async Task<Name> Generate() {
+            Random rand = new Random();
+            int toSkip = rand.Next(1, await _context.Names.CountAsync());
+            return await _context.Names.Skip(toSkip).Take(1).FirstOrDefaultAsync();
+        }
     }
 }
