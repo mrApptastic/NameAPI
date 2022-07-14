@@ -12,10 +12,9 @@ namespace NameBandit.Data
             : base(options)
             { }
 
-        public DbSet<Name> Names { get; set; }
-        
+        public DbSet<Name> Names { get; set; }        
         public DbSet<Category> Categories { get; set; }
-        
+        public DbSet<NameCombos> NameCombinations { get; set; }        
         public DbSet<SyncLog> SyncLogs { get; set; }
     }
 }   
