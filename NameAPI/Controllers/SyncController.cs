@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using NameBandit.Data;
 using Newtonsoft.Json;
+using NameBandit.Data;
 using NameBandit.Helpers;
+using NameBandit.Models;
 
 namespace NameBandit.Controllers
 {

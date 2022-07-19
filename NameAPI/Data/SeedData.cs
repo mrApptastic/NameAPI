@@ -3,8 +3,9 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using NameBandit.Data;
 using NameBandit.Helpers;
+using NameBandit.Models;
 
-namespace NameBandit {
+namespace NameBandit.Data {
 
     public class SeedData {
 
@@ -370,15 +371,15 @@ namespace NameBandit {
 
                 var funnyCombinations =  new List<string>() { "Lucky Luke", "Anders Sand", "Teddy Bjørn", "Dan Mark", "Mette Vuns" };
 
-                foreach (var name in funnyCombinations) {
-                    string[] nameStrings = name.Split(' ');
+                // foreach (var name in funnyCombinations) {
+                //     string[] nameStrings = name.Split(' ');
 
-                    var obj = context.Names.Where(x => x.Text == name).ToList();
-                    foreach (var obj in objs) {
-                        obj.Prefix = true;
-                        titles.Names.Add(obj);
-                    }                   
-                }
+                //     var objs = context.Names.Where(x => x.Text == name).ToList();
+                //     foreach (var obj in objs) {
+                //         obj.Prefix = true;
+                //         titles.Names.Add(obj);
+                //     }                   
+                // }
 
                 #endregion
 

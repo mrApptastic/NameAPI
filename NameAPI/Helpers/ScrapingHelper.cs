@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using HtmlAgilityPack;
 using System.Text;
 using OfficeOpenXml;
+using NameBandit.Models;
 
 namespace NameBandit.Helpers
 {

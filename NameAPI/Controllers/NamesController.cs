@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NameBandit.Data;
+using NameBandit.Models;
 
 namespace NameBandit.Controllers
 {
