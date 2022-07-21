@@ -76,7 +76,7 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var tolkienList = new List<string>() { "Frodo", "Bilbo", "Gandalf", "Sauron" };
+                    var tolkienList = new List<string>() { "Frodo", "Bilbo", "Gandalf", "Sauron", "Aragorn", "Arwen", "Saruman", "Galadriel", "Luthien", "Beren", "Samwise", "Merry", "Pippin", "Gimli", "Gloin", "Legolas", "Boromir", "Faramir" };
 
                     var tolkien = new Category() {
                         Title = "Tolkien",
