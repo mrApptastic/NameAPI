@@ -244,7 +244,7 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var plantsList = new List<string>() { "Hyben", "Mynte", "Solsikke", "Birk", "Amaryllis", "Hyachint", "Eg", "Viol", "Rose" };
+                    var plantsList = new List<string>() { "Hyben", "Mynte", "Solsikke", "Birk", "Amaryllis", "Hyachint", "Eg", "Viol", "Rose", "Oregano", "Timian", "Persille", "Lavendel", "Kløver", "Rosmarin" };
 
                         var plants = new Category() {
                         Title = "Planteriget",
@@ -272,7 +272,7 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var coloursList = new List<string>() { "Gul", "Violet", "Azur", "Blå", "Brun", "Cyan", "Grå", "Grøn", "Hvid", "Indigo", "Lilla", "Lyserød", "Pink", "Okker", "Purpur", "Rosa", "Rød", "Sort", "Umbra" };
+                    var coloursList = new List<string>() { "Gul", "Violet", "Azur", "Blå", "Brun", "Cyan", "Grå", "Grøn", "Hvid", "Indigo", "Lilla", "Lyserød", "Pink", "Okker", "Purpur", "Rosa", "Rød", "Sort", "Umbra", "Lime", "Lyseblå", "Lysegrøn", "Orange" };
 
                         var colours = new Category() {
                         Title = "Farver",
@@ -300,7 +300,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var liquorList = new List<string>() { "Gin", "Martini" };
+                    var liquorList = new List<string>() { "Gin", "Martini", "Vodka", "Whisky", "Whiskey", "Bailey", "Absint", "Absinth", "Rom", "Armagnac", "Champagne", "Riesling", "Mosel", "Vin", "Øl" };
 
                         var booze = new Category() {
                         Title = "Sprut",
