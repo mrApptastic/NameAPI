@@ -76,7 +76,7 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var tolkienList = new List<string>() { "Frodo", "Bilbo", "Gandalf", "Sauron", "Aragorn", "Arwen", "Saruman", "Galadriel", "Luthien", "Beren", "Samwise", "Merry", "Pippin", "Gimli", "Gloin", "Legolas", "Boromir", "Faramir" };
+                    var tolkienList = new List<string>() { "Aragorn", "Arwen", "Baggins", "Balin", "Bard", "Beorn", "Beren", "Bilbo", "Bombadil", "Boromir", "Brandybuck", "Celeborn", "Déagol", "Denethor", "Dís", "Elendil", "Elrond", "Elu", "Elwing", "Éomer", "Éowyn", "Eärendil", "Faramir", "Fëanor", "Felagund", "Fingolfin", "Finrod", "Finwë", "Frodo", "Galadriel", "Gamgee", "Gandalf", "Gil-galad", "Gimli", "Glorfindel", "Goldberry", "Gollum", "Gríma ", "Húrin", "Idril", "Indis", "Isildur", "Kíli", "Legolass", "Lúthien", "Maedhros", "Melian", "Melkor", "Meriadoc", "Merry", "Míriel", "Morgoth", "Okensheild", "Peregrin", "Pippin", "Radagast", "Sam", "Samwise", "Saruman", "Sauron ", "Shelob", "Smaug", "Sméagol", "Théoden", "Thingol", "Thorin", "Thranduil", "Tom", "Took", "Treebeard", "Tuor", "Turambar", "Túrin", "Ungoliant", "Wormtongue" };
 
                     var tolkien = new Category() {
                         Title = "Tolkien",
@@ -258,7 +258,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var naturesList = new List<string>() { "Sne", "Sommer", "Sol", "Sea" };
+                    var naturesList = new List<string>() { "Sne", "Sommer", "Sol", "Sea", "Sten" };
 
                         var nature = new Category() {
                         Title = "Naturen",
