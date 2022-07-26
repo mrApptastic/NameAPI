@@ -48,7 +48,7 @@ namespace NameBandit.Data {
                         }                 
                     }
 
-                    var starWarsList = new List<string>() { "Anakin", "Luke", "Leia", "Jar-Jar", "Qui-Gon", "Obi-Wan", "Han", "Solo", "Darth", "Lando", "Yoda" };
+                    var starWarsList = new List<string>() { "Ackbar", "Adi", "Amedda", "Amidala", "Anakin", "Antilles", "Arvel", "Ayla", "Bail", "Barriss", "Ben", "Beru", "Bib", "Biggs", "Binks", "Boba", "Bolt", "Bossk", "C-3PO", "Calrissian", "Chewbacca", "Cliegg", "Cordé", "Crynyd", "Darklighter", "Darth", "Desilijic", "Dexter", "Dooku", "Dormé", "Dud", "Eeth", "Fett", "Finis", "Fisto", "Fortuna", "Gallia", "Gasgano", "Greedo", "Gregar", "Grievous", "Gunray", "Han", "Hill", "IG-88", "Jabba", "Jango", "Jar", "Jek", "Jettster", "Jinn", "Jocasta", "Kenobi", "Ki-Adi-Mundi", "Kit", "Koon", "Koth", "Lama", "Lando", "Lars", "Leia", "Lobot", "Luke", "Luminara", "Mace", "Mas", "Maul", "Medon", "Mon", "Moore", "Mothma", "Nass", "Nien", "Nu", "Nunb", "Nute", "Obi-Wan", "Offee", "Olié", "Organa", "Owen", "Padmé", "Palpatine", "Panaka", "Plo", "Poggle", "Poof", "Porkins", "Prestor", "Quadinaros", "Quarsh", "Qui-Gon", "R2-D2", "R4-P17", "R5-D4", "Ratts", "Raymus", "Ric", "Roos", "Rugor", "Saesee", "San", "Sebulba", "Secura", "Shaak", "Shmi", "Skywalker", "Sly", "Solo", "Su", "Systri", "Tambor", "Tarfful", "Tarkin", "Tarpals", "Taun", "Ti", "Tiin", "Tion", "Tiure", "Tono", "Tyerel", "Typho", "Unduli", "Vader", "Valorum", "Warrick", "Wat", "Watto", "We", "Wedge", "Wesell", "Whitesun", "Wicket", "Wilhuff", "Windu", "Yarael", "Yoda", "Zam" };
 
                     var starWars = new Category() {
                         Title = "Star Wars",
@@ -388,3 +388,4 @@ namespace NameBandit.Data {
         }
     }
 }
+
