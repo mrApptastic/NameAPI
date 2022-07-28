@@ -62,7 +62,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var starTrekList = new List<string>() { "Jean-Luc", "Kirk" };
+                    var starTrekList = new List<string>() { "Jean-Luc", "Kirk", "Spock", "Data" };
 
                     var starTrek = new Category() {
                         Title = "Star Trek",
