@@ -104,7 +104,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var greekMyhologyList = new List<string>() { "Zeus", "Muse", "Herkules", "Hercules", "Ares", "Afrodite", "Achilles", "Achilleus", "Hektor", "Hector", "Hera", "Herakles", "Atena", "Atene", "Athena", "Athene" };
+                    var greekMyhologyList = new List<string>() { "Zeus", "Muse", "Herkules", "Hercules", "Ares", "Afrodite", "Achilles", "Achilleus", "Hektor", "Hector", "Hera", "Herakles", "Atena", "Atene", "Athena", "Athene", "Troja", "Trojan", "Troy", "Briseis", "Olymp", "Olympe", "Olympia" };
 
                     var greekMyth = new Category() {
                         Title = "Græsk Mytologi",
@@ -174,7 +174,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var fictivePeopleList = new List<string>() { "Barnaby", "Obelix", "Sherlock", "Snoopy" };
+                    var fictivePeopleList = new List<string>() { "Asterix", "Barbie", "Barnaby", "Obelix", "Sherlock", "Snoopy", "Tintin" };
 
                         var fictive = new Category() {
                         Title = "Fiktive Personer",
@@ -230,7 +230,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var animalsList = new List<string>() { "Bjørn", "Ulv", "Cobra", "Kobra", "Haj", "Havand", "Musling", "Panda", "Kamel", "Løve", "Tiger", "Panthera", "Lion", "Svane", "Spurv" };
+                    var animalsList = new List<string>() { "Bjørn", "Ulv", "Cobra", "Kobra", "Haj", "Havand", "Musling", "Panda", "Kamel", "Løve", "Tiger", "Panthera", "Lion", "Svane", "Spurv", "Ravn", "Stærkodder" };
 
                         var animals = new Category() {
                         Title = "Dyreriget",
@@ -314,7 +314,7 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var titleList = new List<string>() { "Skipper", "Kong", "King", "Prince", "Queen", "Prince", "Princess", "Lord", "Sir", "Brormand", "Skat", "Fru", "Viking", "Bror", "Lillebror", "Lillemor", "Lillesøster", "Søster", "Baron", "Earl", "Jarl", "Sherif", "Duke", "Doc" };
+                    var titleList = new List<string>() { "Admiral", "Skipper", "Kong", "King", "Prince", "Queen", "Prince", "Princess", "Lord", "Sir", "Brormand", "Skat", "Fru", "Viking", "Bror", "Lillebror", "Lillemor", "Lillesøster", "Søster", "Baron", "Earl", "Jarl", "Sherif", "Duke", "Doc" };
 
                     var titles = new Category() {
                         Title = "Titler",
