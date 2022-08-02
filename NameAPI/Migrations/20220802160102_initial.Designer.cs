@@ -9,8 +9,8 @@ using NameBandit.Data;
 namespace NameBandit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220802120658_Initial")]
-    partial class Initial
+    [Migration("20220802160102_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,9 @@ namespace NameBandit.Migrations
 
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<bool>("Female")
                         .HasColumnType("tinyint(1)");

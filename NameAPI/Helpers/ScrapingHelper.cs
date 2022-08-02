@@ -7,8 +7,7 @@ using HtmlAgilityPack;
 using System.Text;
 using OfficeOpenXml;
 using NameBandit.Models;
-// https://min-mave.dk/navne/[Name.ToLower()] 
-// http://www.navnebetydning.dk/drengenavn/[Name].shtml/ 
+
 // https://hellasofia.com/numerologisk-navne-beregner/
 namespace NameBandit.Helpers
 {
@@ -147,6 +146,35 @@ namespace NameBandit.Helpers
 
             return theList;      
         }
-    }
+ 
+        public static string AddNameData(Name name) {
+            HtmlWeb web = new HtmlWeb();
+            web.AutoDetectEncoding = false;
+            web.OverrideEncoding = Encoding.GetEncoding("iso-8859-1");
 
+            // https://min-mave.dk/navne/[Name.ToLower()] 
+            // http://www.navnebetydning.dk/drengenavn/[Name].shtml/ 
+
+            string url = String.Format("http://www.navnebetydning.dk/{0}/{1}.shtml", (name.Male ? "drengenavn" : "pigenavn"), name?.Text);
+            var ib = web.Load(url);
+
+            var bo = ib.DocumentNode.SelectNodes("//table");
+
+            if (bo != null) {
+                foreach (HtmlNode row in bo) {
+                    foreach (HtmlAttribute attr in row.Attributes) {
+                        if (attr?.Name == "width") {
+                            if (attr?.Value == "100%") {
+                                if (row.InnerText.Contains("Se også:")) {
+                                    return row.InnerText.Substring(row.InnerText.IndexOf(name.Text) + name.Text.Length).Split("Se også:")[0].Replace(System.Environment.NewLine, " ").Replace("&nbsp;", " ").Replace(".", ". ").Trim();
+                                }                            
+                            }
+                        }
+                    }
+                }
+            }
+           
+            return "";
+        }
+    }
 }

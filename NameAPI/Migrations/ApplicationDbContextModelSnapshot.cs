@@ -43,6 +43,9 @@ namespace NameBandit.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<bool>("Female")
                         .HasColumnType("tinyint(1)");
 

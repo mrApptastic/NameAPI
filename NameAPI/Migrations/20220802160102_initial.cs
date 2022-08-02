@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NameBandit.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -67,6 +67,7 @@ namespace NameBandit.Migrations
                     Prefix = table.Column<bool>(nullable: false),
                     Suffix = table.Column<bool>(nullable: false),
                     Vibration = table.Column<int>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     NameComboId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true)
                 },

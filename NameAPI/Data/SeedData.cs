@@ -25,6 +25,7 @@ namespace NameBandit.Data {
 
                 foreach (var name in names) {
                     name.Vibration = CalculationHelper.CalculateNameVibration(name.Text);
+                    name.Description = ScrapingHelper.AddNameData(name);
                 }
 
                 context.Names.AddRange(names.Distinct().ToList());
@@ -350,10 +351,16 @@ namespace NameBandit.Data {
 
                         var funnyList = new List<Name>();
 
-                        foreach (var part in parts) {
+                        for (int i = 0; i < parts.Count(); i++) {
+                            string part = parts[i];
                             var ibbermand = context.Names.Where(x => x.Text == part).FirstOrDefault();
 
                             if (ibbermand != null) {
+                                if (i == 0) {
+                                    ibbermand.Prefix = true;
+                                } else {
+                                    ibbermand.Suffix = true;
+                                }
                                 funnyList.Add(ibbermand);
                             }
                         }

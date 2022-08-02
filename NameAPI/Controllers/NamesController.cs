@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,7 +28,31 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Name>>> Get(int? vib, int? sex)
+        public async Task<ActionResult<IEnumerable<Name>>> Get(string search, int? vib, int? sex)
+        {
+            var names = from n in _context.Names select n;
+
+            if (search?.Length > 0) {
+                names = names.Where(x => x.Text.ToLower().Contains(HttpUtility.UrlDecode(search).ToLower()));
+            }
+
+            if (vib > 0) {
+                names = names.Where(x => x.Vibration == vib);
+            }
+
+            if (sex != null) {
+                if (sex == 1) {
+                    names = names.Where(x => x.Female == true);
+                } else if (sex == 0) {
+                    names = names.Where(x => x.Male == true);
+                }
+            }
+            
+            return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
+        }
+
+        [HttpGet("suggest")]
+        public async Task<ActionResult<IEnumerable<Name>>> Suggest(int? vib, int? sex)
         {
             var names = from n in _context.Names select n;
 
@@ -43,7 +68,7 @@ namespace NameBandit.Controllers
                 }
             }
             
-            return await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync();
+            return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
         }
 
         [HttpPost]
@@ -52,7 +77,7 @@ namespace NameBandit.Controllers
 
             var names = from n in _context.Names where n.Id == name.Id select n;
             
-            return await names.ToListAsync();
+            return Ok(await names.ToListAsync());
         }
 
         private async Task<Name> Generate() {
