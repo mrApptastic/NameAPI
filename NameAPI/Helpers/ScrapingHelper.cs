@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 using System.Text;
 using OfficeOpenXml;
 using NameBandit.Models;
-
+// https://min-mave.dk/navne/[Name] // http://www.navnebetydning.dk/drengenavn/[Name].shtml/
 namespace NameBandit.Helpers
 {
     public class ScrapingHelper
