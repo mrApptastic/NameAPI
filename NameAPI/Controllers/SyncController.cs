@@ -30,7 +30,7 @@ namespace NameBandit.Controllers
         [Route("Logs")]
         public async Task<ActionResult<ICollection<SyncLog>>> GetLog()
         {          
-            return await _context.SyncLogs.ToListAsync();
+            return await _context.NameSyncLogs.ToListAsync();
         }
 
         [HttpGet]
@@ -73,7 +73,7 @@ namespace NameBandit.Controllers
                 msg = "The synchronization has failed with the following exception: " + exp.Message;
             }
 
-            _context.SyncLogs.Add(new SyncLog() {
+            _context.NameSyncLogs.Add(new SyncLog() {
                 Id = 0,
                 Date = DateTime.Now,
                 Log = msg
@@ -96,7 +96,7 @@ namespace NameBandit.Controllers
             foreach (Category category in adder) {
                 AddCategory(db, category.Title);
 
-                var dbCategory = db.Categories.Where(x => x.Title == category.Title).FirstOrDefault();
+                var dbCategory = db.NameCategories.Where(x => x.Title == category.Title).FirstOrDefault();
 
                 if (dbCategory != null) {
                     if (dbCategory.Names == null) {
@@ -115,10 +115,10 @@ namespace NameBandit.Controllers
         }
 
         private static void AddCategory(ApplicationDbContext db, string CategoryName) {
-            bool hasCategory = db.Categories.Select(x => x.Title).Contains(CategoryName);
+            bool hasCategory = db.NameCategories.Select(x => x.Title).Contains(CategoryName);
 
             if (!hasCategory) {
-                db.Categories.Add(new Category() {
+                db.NameCategories.Add(new Category() {
                     Id = 0,
                     Title = CategoryName,
                     Names = new List<Name>()

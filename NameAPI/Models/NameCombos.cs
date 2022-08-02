@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NameBandit.Models 
 {
-    public class NameCombos
+    public class NameCombo
     {  
         [Key]
         public int Id { get; set; }

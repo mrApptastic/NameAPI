@@ -16,5 +16,8 @@ namespace NameBandit.Models
         public bool Prefix { get; set; }
         public bool Suffix { get; set; }
         public int Vibration { get; set; }
+#nullable enable
+        public NameCombo? NameCombo { get; set; }
+#nullable disable
     }
 }

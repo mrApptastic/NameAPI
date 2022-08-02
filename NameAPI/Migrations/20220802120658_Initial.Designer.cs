@@ -9,8 +9,8 @@ using NameBandit.Data;
 namespace NameBandit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210712075122_PrefixesAndSuffixes")]
-    partial class PrefixesAndSuffixes
+    [Migration("20220802120658_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,7 +19,7 @@ namespace NameBandit.Migrations
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("Category", b =>
+            modelBuilder.Entity("NameBandit.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,10 +30,10 @@ namespace NameBandit.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("NameCategories");
                 });
 
-            modelBuilder.Entity("Name", b =>
+            modelBuilder.Entity("NameBandit.Models.Name", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,6 +51,9 @@ namespace NameBandit.Migrations
                     b.Property<bool>("Male")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int?>("NameComboId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("Prefix")
                         .HasColumnType("tinyint(1)");
 
@@ -67,10 +70,28 @@ namespace NameBandit.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("NameComboId");
+
                     b.ToTable("Names");
                 });
 
-            modelBuilder.Entity("SyncLog", b =>
+            modelBuilder.Entity("NameBandit.Models.NameCombo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("NameCombinations");
+                });
+
+            modelBuilder.Entity("NameBandit.Models.SyncLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,13 +105,24 @@ namespace NameBandit.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SyncLogs");
+                    b.ToTable("NameSyncLogs");
                 });
 
-            modelBuilder.Entity("Name", b =>
+            modelBuilder.Entity("NameBandit.Models.Name", b =>
                 {
-                    b.HasOne("Category", null)
+                    b.HasOne("NameBandit.Models.Category", null)
                         .WithMany("Names")
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("NameBandit.Models.NameCombo", "NameCombo")
+                        .WithMany("Names")
+                        .HasForeignKey("NameComboId");
+                });
+
+            modelBuilder.Entity("NameBandit.Models.NameCombo", b =>
+                {
+                    b.HasOne("NameBandit.Models.Category", "Category")
+                        .WithMany()
                         .HasForeignKey("CategoryId");
                 });
 #pragma warning restore 612, 618

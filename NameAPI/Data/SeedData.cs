@@ -14,7 +14,7 @@ namespace NameBandit.Data {
             if (context.Database.GetMigrations().Count() > 0
                     && context.Database.GetPendingMigrations().Count() == 0
                     && context.Names.Count() == 0
-                    && context.Categories.Count() == 0) {
+                    && context.NameCategories.Count() == 0) {
 
                 var names = new List<Name>();
 
@@ -33,7 +33,7 @@ namespace NameBandit.Data {
 
                 #region Categories
 
-                if (context.Categories.Count() == 0) {
+                if (context.NameCategories.Count() == 0) {
                     var bibleList = new List<string>() { "Adam", "Alexander", "Aleksander", "Benjamin", "Rakel", "Rachel", "Cornelius", "David", "Goliat", "Goliath", "Elias", "Gabriel", "Immanuel", "Emmanuel", "Isak", "Sara", "Sarah", "Jakob", "Jacob", "Johannes", "John", "Hans", "Jesus", "Jonatan", "Jonathan", "Lukas", "Lucas", "Markus", "Marcus", "Mattias", "Mathias", "Matias", "Matthæus", "Mikael", "Michael", "Noah", "Noa", "Silas", "Thomas", "Ada", "Elisabeth", "Elizabeth", "Elisabet", "Elizabet", "Ester", "Esther", "Eva", "Johanna", "Joanna", "Lea", "Leah", "Maria", "Mariah", "Rebekka", "Rebecca" };
 
                     var bible = new Category() {
@@ -343,7 +343,33 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    context.Categories.AddRange(
+                    var funnyCombinations =  new List<string>() { "Lucky Luke", "Anders Sand", "Teddy Bjørn", "Dan Mark", "Mette Vuns" };
+                
+                    foreach (var name in funnyCombinations) {
+                        string[] parts = name.Split(' ');
+
+                        var funnyList = new List<Name>();
+
+                        foreach (var part in parts) {
+                            var ibbermand = context.Names.Where(x => x.Text == part).FirstOrDefault();
+
+                            if (ibbermand != null) {
+                                funnyList.Add(ibbermand);
+                            }
+                        }
+                        
+                        if (funnyList.Count() > 0) {
+                            var combo = new NameCombo() {
+                                Id = 0,
+                                Names = funnyList,
+                                Category = funny
+                            };
+
+                            context.NameCombinations.Add(combo); 
+                        }              
+                    }
+
+                    context.NameCategories.AddRange(
                         bible,
                         starWars,
                         starTrek,
@@ -366,20 +392,8 @@ namespace NameBandit.Data {
                         booze,
                         titles,
                         funny
-                    );
+                    );                    
                 }
-
-                var funnyCombinations =  new List<string>() { "Lucky Luke", "Anders Sand", "Teddy Bjørn", "Dan Mark", "Mette Vuns" };
-
-                // foreach (var name in funnyCombinations) {
-                //     string[] nameStrings = name.Split(' ');
-
-                //     var objs = context.Names.Where(x => x.Text == name).ToList();
-                //     foreach (var obj in objs) {
-                //         obj.Prefix = true;
-                //         titles.Names.Add(obj);
-                //     }                   
-                // }
 
                 #endregion
 
