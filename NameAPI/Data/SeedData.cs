@@ -411,7 +411,7 @@ namespace NameBandit.Data {
                     var funnyCombinations =  new List<string>() { "Lucky Luke", "Anders Sand", "Teddy Bjørn", "Dan Mark", "Mette Vuns", "Awesome Viking",  "Awesome Willy", "Awesome Man", 
                     "Nice Viking", "Nice Willy", "Nice Man", "Rocket Man", "Bunny Man", "Rocket Girl", "Nice Girl", "Bunny Girl", "Lucky Man", "Strange Man", "The Man", "Strange Viking", 
                     "Strange Willy", "The Willy", "The Viking" "Gordon Gekko", "Tom Barnaby", "John Barnaby", "Nice Pixie", "Pixie Girl", "Rocket Pixie", "Pixie Bunny", "New York", 
-                    "Ninja Girl", "Boy George", "David Bowie", "Elvis Presley", "Bob Paisley", "Miley Cyrus" };
+                    "Ninja Girl" };
                 
                     foreach (var name in funnyCombinations) {
                         string[] parts = name.Split(' ');
@@ -451,7 +451,7 @@ namespace NameBandit.Data {
                     "Rutherford Hayes", "James Garfield", "Chester Arthur", "Grover Cleveland", "Benjamin Harrison", "William McKinley", "Theodore Roosevelt", "William Taft", 
                     "Woodrow Wilson", "Warren Harding", "Calvin Coolidge", "Herbert Hoover", "Franklin Roosevelt", "Harry Truman", "Dwight Eisenhower", "John Kennedy", "Lyndon Johnson", 
                     "Richard Nixon", "Gerald Ford", "Jimmy Carter", "George Bush", "Barack Obama", "Donald Trump", "Joe Biden", "Thomas Hardy", "Ian Fleming", "Charles Dickens", "Mary Shelley",
-                    "Lord Nelson", "Charles Mason", "Jeremiah Dixon", "Thomas Edison" };
+                    "Lord Nelson", "Charles Mason", "Jeremiah Dixon", "Thomas Edison", "Boy George", "David Bowie", "Elvis Presley", "Bob Paisley", "Miley Cyrus" };
                 
                     foreach (var name in famousCombinations) {
                         string[] parts = name.Split(' ');
