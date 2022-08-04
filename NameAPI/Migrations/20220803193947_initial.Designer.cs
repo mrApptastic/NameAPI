@@ -9,7 +9,7 @@ using NameBandit.Data;
 namespace NameBandit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220802160102_initial")]
+    [Migration("20220803193947_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,30 @@ namespace NameBandit.Migrations
                     b.ToTable("NameCombinations");
                 });
 
+            modelBuilder.Entity("NameBandit.Models.NamePrio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NameComboId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("NameId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Prio")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NameComboId");
+
+                    b.HasIndex("NameId");
+
+                    b.ToTable("NamePrio");
+                });
+
             modelBuilder.Entity("NameBandit.Models.SyncLog", b =>
                 {
                     b.Property<int>("Id")
@@ -118,7 +142,7 @@ namespace NameBandit.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.HasOne("NameBandit.Models.NameCombo", "NameCombo")
-                        .WithMany("Names")
+                        .WithMany()
                         .HasForeignKey("NameComboId");
                 });
 
@@ -127,6 +151,17 @@ namespace NameBandit.Migrations
                     b.HasOne("NameBandit.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("NameBandit.Models.NamePrio", b =>
+                {
+                    b.HasOne("NameBandit.Models.NameCombo", null)
+                        .WithMany("Names")
+                        .HasForeignKey("NameComboId");
+
+                    b.HasOne("NameBandit.Models.Name", "Name")
+                        .WithMany()
+                        .HasForeignKey("NameId");
                 });
 #pragma warning restore 612, 618
         }

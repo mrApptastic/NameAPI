@@ -88,10 +88,47 @@ namespace NameBandit.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "NamePrio",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    NameId = table.Column<int>(nullable: true),
+                    Prio = table.Column<int>(nullable: true),
+                    NameComboId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NamePrio", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_NamePrio_NameCombinations_NameComboId",
+                        column: x => x.NameComboId,
+                        principalTable: "NameCombinations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_NamePrio_Names_NameId",
+                        column: x => x.NameId,
+                        principalTable: "Names",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_NameCombinations_CategoryId",
                 table: "NameCombinations",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NamePrio_NameComboId",
+                table: "NamePrio",
+                column: "NameComboId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_NamePrio_NameId",
+                table: "NamePrio",
+                column: "NameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Names_CategoryId",
@@ -107,10 +144,13 @@ namespace NameBandit.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Names");
+                name: "NamePrio");
 
             migrationBuilder.DropTable(
                 name: "NameSyncLogs");
+
+            migrationBuilder.DropTable(
+                name: "Names");
 
             migrationBuilder.DropTable(
                 name: "NameCombinations");
