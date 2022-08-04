@@ -446,7 +446,7 @@ namespace NameBandit.Data {
                             }
                         }
                         
-                        if (funnyList.Count() > 0) {
+                        if (funnyList.Count() == parts.Count()) {
                             var combo = new NameCombo() {
                                 Id = 0,
                                 Names = funnyList,
@@ -497,7 +497,7 @@ namespace NameBandit.Data {
                             }
                         }
                         
-                        if (famousList.Count() > 0) {
+                        if (famousList.Count() == parts.Count()) {
                             var combo = new NameCombo() {
                                 Id = 0,
                                 Names = famousList,

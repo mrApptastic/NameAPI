@@ -8,7 +8,6 @@ using System.Text;
 using OfficeOpenXml;
 using NameBandit.Models;
 
-// https://hellasofia.com/numerologisk-navne-beregner/
 namespace NameBandit.Helpers
 {
     public class ScrapingHelper
