@@ -202,7 +202,7 @@ namespace NameBandit.Data {
                     }
                     
                     var famousPeopleList = new List<string>() { "Elvis", "Clapton", "Armstrong", "Figo", "Pele", "Ronaldo", "Kaka", "Zlatan", "Napoleon", "Rocco", "Guti", 
-                    "Nena", "Cæsar", "Dio", "Ozzy", "Dante", "Camus", "Chaucer" };
+                    "Nena", "Cæsar", "Dio", "Ozzy", "Dante", "Camus", "Chaucer", "Cher", "Enya" };
 
                         var famous = new Category() {
                         Title = "Berømte Personer",
@@ -474,7 +474,8 @@ namespace NameBandit.Data {
                     "Bryan Adams", "Rod Stewart", "Hans Kirk", "Bille August", "Jack London", "John Milton", "Tom Hanks", "James Barrie", "Robert Scott", "Harper Lee", 
                     "Herman Melville", "Antonio Vivaldi", "Dina Jewel", "Peter North", "Ron Jeremy", "Evan Stone", "Michael Keaton", "Michael Fox", "Bob Marley", "Ruby Dee",
                     "Jim Davis", "Viven Leigh", "Samantha Bee", "Margaret Cho", "Elizabeth Taylor", "Lucy Liu", "Agatha Christie", "George Eliot", "Marie Curie", "Carol King",
-                    "Billie King" };
+                    "Billie King", "Brune Mars", "Bent Fabricius Bjerre", "Nat King Cole", "Donna Summer", "Hanne Boel", "Anne Linett", "Cliff Richard", "Keith Richard", 
+                    "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi" };
                 
                     foreach (var name in famousCombinations) {
                         string[] parts = name.Split(' ');
