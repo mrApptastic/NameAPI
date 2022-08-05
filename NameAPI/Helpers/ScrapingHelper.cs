@@ -185,21 +185,7 @@ namespace NameBandit.Helpers
             var ib = web.Load(url);
 
             var bo = ib.DocumentNode.SelectNodes("//div*[@class=\"et_pb_toggle\"]");
-
-            // if (bo != null) {
-            //     foreach (HtmlNode row in bo) {
-            //         foreach (HtmlAttribute attr in row.Attributes) {
-            //             if (attr?.Name == "width") {
-            //                 if (attr?.Value == "100%") {
-            //                     if (row.InnerText.Contains("Se også:")) {
-            //                         return row.InnerText.Substring(row.InnerText.IndexOf(name.Text) + name.Text.Length).Split("Se også:")[0].Replace(System.Environment.NewLine, " ").Replace("&nbsp;", " ").Replace(".", ". ").Trim();
-            //                     }                            
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-           
+          
             return "";
         }
     }
