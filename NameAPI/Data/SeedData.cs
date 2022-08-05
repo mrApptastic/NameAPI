@@ -11,6 +11,7 @@ namespace NameBandit.Data {
 
 
         public static void SeedDatabase(ApplicationDbContext context) {
+            var bob = ScrapingHelper.GetVibrationMeanings();
             if (context.Database.GetMigrations().Count() > 0
                     && context.Database.GetPendingMigrations().Count() == 0
                     && context.Names.Count() == 0
