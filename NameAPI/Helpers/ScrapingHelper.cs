@@ -176,17 +176,48 @@ namespace NameBandit.Helpers
             return "";
         }
 
-        public static string GetVibrationMeanings() {
+        public static List<VibrationNumber> GetVibrationMeanings() {
             HtmlWeb web = new HtmlWeb();
-            web.AutoDetectEncoding = false;
-            web.OverrideEncoding = Encoding.GetEncoding("iso-8859-1");
+            web.AutoDetectEncoding = true;
+            web.OverrideEncoding = Encoding.UTF8;
+
+            var bobby = new List<VibrationNumber>();
 
             string url = "https://hellasofia.com/numerologisk-navne-beregner/";
             var ib = web.Load(url);
 
-            var bo = ib.DocumentNode.SelectNodes("//div*[@class=\"et_pb_toggle\"]");
+            var bo = ib.DocumentNode.SelectNodes("//div[contains(@class, 'et_pb_toggle')]");
+
+            foreach (var bob in bo) {
+                string content = bob.InnerText.Replace("\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t", "");
+
+                string titleArea = content.Split("\n\t\t\t\t")[0];
+
+                if (!titleArea.Contains(" - ")) {
+                    continue;
+                }
+
+                int vibration = int.Parse(titleArea.Split(" - ")[0].Split("/")[0]);
+                int destiny = 0;
+
+                if (titleArea.Split(" - ")[0].Contains("/")) {
+                    destiny = int.Parse(titleArea.Split(" - ")[0].Split("/")[1]);
+                }
+
+                string title = titleArea.Split(" - ")[1];
+
+                string contentArea = content.Replace(titleArea, "").Trim();
+
+                bobby.Add(new VibrationNumber() {
+                    Id = 0,
+                    Vibration = vibration,
+                    Destiny = destiny,
+                    Title = title,
+                    Description = contentArea
+                });
+            }
           
-            return "";
+            return bobby;
         }
     }
 }
