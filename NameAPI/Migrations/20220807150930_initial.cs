@@ -82,7 +82,7 @@ namespace NameBandit.Migrations
                     Active = table.Column<bool>(nullable: false),
                     Prefix = table.Column<bool>(nullable: false),
                     Suffix = table.Column<bool>(nullable: false),
-                    Vibration = table.Column<int>(nullable: false),
+                    VibrationId = table.Column<int>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     NameComboId = table.Column<int>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true)
@@ -100,6 +100,12 @@ namespace NameBandit.Migrations
                         name: "FK_Names_NameCombinations_NameComboId",
                         column: x => x.NameComboId,
                         principalTable: "NameCombinations",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Names_NameVibrationNumbers_VibrationId",
+                        column: x => x.VibrationId,
+                        principalTable: "NameVibrationNumbers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -155,6 +161,11 @@ namespace NameBandit.Migrations
                 name: "IX_Names_NameComboId",
                 table: "Names",
                 column: "NameComboId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Names_VibrationId",
+                table: "Names",
+                column: "VibrationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -166,13 +177,13 @@ namespace NameBandit.Migrations
                 name: "NameSyncLogs");
 
             migrationBuilder.DropTable(
-                name: "NameVibrationNumbers");
-
-            migrationBuilder.DropTable(
                 name: "Names");
 
             migrationBuilder.DropTable(
                 name: "NameCombinations");
+
+            migrationBuilder.DropTable(
+                name: "NameVibrationNumbers");
 
             migrationBuilder.DropTable(
                 name: "NameCategories");

@@ -12,8 +12,14 @@ namespace NameBandit.Data {
 
         public static void SeedDatabase(ApplicationDbContext context) {            
             if (context.Database.GetMigrations().Count() > 0 && context.Database.GetPendingMigrations().Count() == 0) {
+                if (context.NameVibrationNumbers.Count() == 0) {
+                    context.NameVibrationNumbers.AddRange(ScrapingHelper.GetVibrationMeanings());
+                    context.SaveChanges();
+                }
                 
                 if (context.Names.Count() == 0) {
+                    var vibrations = context.NameVibrationNumbers.ToList();
+
                     var names = new List<Name>();
 
                     names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/drenge.htm"); 
@@ -22,8 +28,15 @@ namespace NameBandit.Data {
                     names = ScrapingHelper.ScapeNames2(names);
 
                     foreach (var name in names) {
-                        name.Vibration = CalculationHelper.CalculateNameVibration(name.Text);
-                        name.Description = ScrapingHelper.AddNameData(name);
+                        int vibration = CalculationHelper.CalculateNameVibration(name.Text);
+
+                        var vibNumber = vibrations.Find(x => x.Vibration == vibration);
+
+                        if (vibNumber != null) {
+                            name.Vibration = vibNumber;
+                        }                        
+                        
+                        // name.Description = ScrapingHelper.AddNameData(name);
                     }
 
                     context.Names.AddRange(names.Distinct().ToList());
@@ -536,10 +549,6 @@ namespace NameBandit.Data {
                 }
 
                 #endregion
-
-                if (context.NameVibrationNumbers.Count() == 0) {
-                    context.NameVibrationNumbers.AddRange(ScrapingHelper.GetVibrationMeanings());
-                }
 
                 context.SaveChanges();
             }

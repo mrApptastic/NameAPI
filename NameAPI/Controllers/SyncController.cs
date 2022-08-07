@@ -52,7 +52,7 @@ namespace NameBandit.Controllers
                 // AddCategories(_context);
 
                 foreach (var item in theList.OrderBy(x => x.Text)) {
-                    item.Vibration = CalculationHelper.CalculateNameVibration(item.Text);
+                    // item.Vibration = CalculationHelper.CalculateNameVibration(item.Text);
 
                     if (item.Id == 0) {
                         _context.Names.Add(item);

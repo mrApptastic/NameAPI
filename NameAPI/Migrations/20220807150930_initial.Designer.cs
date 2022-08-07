@@ -9,7 +9,7 @@ using NameBandit.Data;
 namespace NameBandit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220807142054_initial")]
+    [Migration("20220807150930_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,7 +66,7 @@ namespace NameBandit.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("Vibration")
+                    b.Property<int?>("VibrationId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -74,6 +74,8 @@ namespace NameBandit.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("NameComboId");
+
+                    b.HasIndex("VibrationId");
 
                     b.ToTable("Names");
                 });
@@ -167,6 +169,10 @@ namespace NameBandit.Migrations
                     b.HasOne("NameBandit.Models.NameCombo", "NameCombo")
                         .WithMany()
                         .HasForeignKey("NameComboId");
+
+                    b.HasOne("NameBandit.Models.VibrationNumber", "Vibration")
+                        .WithMany()
+                        .HasForeignKey("VibrationId");
                 });
 
             modelBuilder.Entity("NameBandit.Models.NameCombo", b =>

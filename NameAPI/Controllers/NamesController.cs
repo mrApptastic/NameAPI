@@ -30,14 +30,14 @@ namespace NameBandit.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Name>>> Get(string search, int? vib, int? sex)
         {
-            var names = from n in _context.Names select n;
+            var names = _context.Names.Include(x => x.Vibration).AsQueryable();
 
             if (search?.Length > 0) {
                 names = names.Where(x => x.Text.ToLower().Contains(HttpUtility.UrlDecode(search).ToLower()));
             }
 
             if (vib > 0) {
-                names = names.Where(x => x.Vibration == vib);
+                names = names.Where(x => x.Vibration.Vibration == vib);
             }
 
             if (sex != null) {
@@ -54,10 +54,10 @@ namespace NameBandit.Controllers
         [HttpGet("suggest")]
         public async Task<ActionResult<IEnumerable<Name>>> Suggest(int? vib, int? sex)
         {
-            var names = from n in _context.Names select n;
+            var names = _context.Names.Include(x => x.Vibration).AsQueryable();
 
             if (vib > 0) {
-                names = names.Where(x => x.Vibration == vib);
+                names = names.Where(x => x.Vibration.Vibration == vib);
             }
 
             if (sex != null) {
