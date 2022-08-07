@@ -10,29 +10,27 @@ namespace NameBandit.Data {
     public class SeedData {
 
 
-        public static void SeedDatabase(ApplicationDbContext context) {
-            var bob = ScrapingHelper.GetVibrationMeanings();
-            if (context.Database.GetMigrations().Count() > 0
-                    && context.Database.GetPendingMigrations().Count() == 0
-                    && context.Names.Count() == 0
-                    && context.NameCategories.Count() == 0) {
+        public static void SeedDatabase(ApplicationDbContext context) {            
+            if (context.Database.GetMigrations().Count() > 0 && context.Database.GetPendingMigrations().Count() == 0) {
+                
+                if (context.Names.Count() == 0) {
+                    var names = new List<Name>();
 
-                var names = new List<Name>();
+                    names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/drenge.htm"); 
+                    names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/piger.htm", true);
 
-                names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/drenge.htm"); 
-                names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/piger.htm", true);
+                    names = ScrapingHelper.ScapeNames2(names);
 
-                names = ScrapingHelper.ScapeNames2(names);
+                    foreach (var name in names) {
+                        name.Vibration = CalculationHelper.CalculateNameVibration(name.Text);
+                        name.Description = ScrapingHelper.AddNameData(name);
+                    }
 
-                foreach (var name in names) {
-                    name.Vibration = CalculationHelper.CalculateNameVibration(name.Text);
-                    // name.Description = ScrapingHelper.AddNameData(name);
+                    context.Names.AddRange(names.Distinct().ToList());
+
+                    context.SaveChanges();   
                 }
-
-                context.Names.AddRange(names.Distinct().ToList());
-
-                context.SaveChanges();                
-
+             
                 #region Categories
 
                 if (context.NameCategories.Count() == 0) {
@@ -538,6 +536,10 @@ namespace NameBandit.Data {
                 }
 
                 #endregion
+
+                if (context.NameVibrationNumbers.Count() == 0) {
+                    context.NameVibrationNumbers.AddRange(ScrapingHelper.GetVibrationMeanings());
+                }
 
                 context.SaveChanges();
             }

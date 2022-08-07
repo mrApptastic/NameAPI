@@ -186,17 +186,27 @@ namespace NameBandit.Helpers
             string url = "https://hellasofia.com/numerologisk-navne-beregner/";
             var ib = web.Load(url);
 
-            var bo = ib.DocumentNode.SelectNodes("//div[contains(@class, 'et_pb_toggle')]");
+            HtmlNodeCollection abra = ib.DocumentNode.SelectNodes("//h6[contains(@class, 'et_pb_toggle_title')]");
 
-            foreach (var bob in bo) {
-                string content = bob.InnerText.Replace("\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t", "");
+            HtmlNodeCollection kadabra = ib.DocumentNode.SelectNodes("//div[contains(@class, 'et_pb_toggle_content')]");
 
-                string titleArea = content.Split("\n\t\t\t\t")[0];
+            for (int j = 1; j < 10; j++) {
+                bobby.Add(new VibrationNumber() {
+                    Id = 0,
+                    Vibration = j,
+                    Destiny = 0,
+                    Title = abra[0].InnerText,
+                    Description = kadabra[0].InnerText
+                });
+            }
+
+            for (int i = 1; i < abra.Count(); i++) {
+                string titleArea = abra[i].InnerText.Replace("–", "-");
 
                 if (!titleArea.Contains(" - ")) {
                     continue;
                 }
-
+                
                 int vibration = int.Parse(titleArea.Split(" - ")[0].Split("/")[0]);
                 int destiny = 0;
 
@@ -205,15 +215,14 @@ namespace NameBandit.Helpers
                 }
 
                 string title = titleArea.Split(" - ")[1];
-
-                string contentArea = content.Replace(titleArea, "").Trim();
+                string description = kadabra[i].InnerText;
 
                 bobby.Add(new VibrationNumber() {
                     Id = 0,
                     Vibration = vibration,
                     Destiny = destiny,
                     Title = title,
-                    Description = contentArea
+                    Description = description
                 });
             }
           

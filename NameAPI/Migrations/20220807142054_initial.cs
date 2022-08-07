@@ -36,6 +36,22 @@ namespace NameBandit.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NameVibrationNumbers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Vibration = table.Column<int>(nullable: false),
+                    Destiny = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NameVibrationNumbers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "NameCombinations",
                 columns: table => new
                 {
@@ -148,6 +164,9 @@ namespace NameBandit.Migrations
 
             migrationBuilder.DropTable(
                 name: "NameSyncLogs");
+
+            migrationBuilder.DropTable(
+                name: "NameVibrationNumbers");
 
             migrationBuilder.DropTable(
                 name: "Names");

@@ -133,6 +133,29 @@ namespace NameBandit.Migrations
                     b.ToTable("NameSyncLogs");
                 });
 
+            modelBuilder.Entity("NameBandit.Models.VibrationNumber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Destiny")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("Vibration")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NameVibrationNumbers");
+                });
+
             modelBuilder.Entity("NameBandit.Models.Name", b =>
                 {
                     b.HasOne("NameBandit.Models.Category", null)
