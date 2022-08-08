@@ -39,6 +39,7 @@ namespace NameBandit.Controllers
             string msg = "";
   
             try {
+                var vibrations = _context.NameVibrationNumbers.ToList();
                 var names = from n in _context.Names select n;
 
                 var theList = names.ToList();
@@ -52,7 +53,13 @@ namespace NameBandit.Controllers
                 // AddCategories(_context);
 
                 foreach (var item in theList.OrderBy(x => x.Text)) {
-                    // item.Vibration = CalculationHelper.CalculateNameVibration(item.Text);
+                    int vibration = CalculationHelper.CalculateNameVibration(item.Text);
+
+                    var vibNumber = vibrations.Find(x => x.Vibration == vibration);
+
+                    if (vibNumber != null) {
+                            item.Vibration = vibNumber;
+                    }   
 
                     if (item.Id == 0) {
                         _context.Names.Add(item);
@@ -63,6 +70,7 @@ namespace NameBandit.Controllers
                             lilleIb.Female = item.Female;
                             lilleIb.Active = item.Active;
                             lilleIb.Text = item.Text;
+                            lilleIb.Vibration = item.Vibration;
                         }
                     }
                 }

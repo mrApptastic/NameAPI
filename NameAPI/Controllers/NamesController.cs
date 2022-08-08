@@ -28,24 +28,40 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Name>>> Get(string search, int? vib, int? sex)
+        public async Task<ActionResult<IEnumerable<Name>>> Get(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength)
         {
             var names = _context.Names.Include(x => x.Vibration).AsQueryable();
 
-            if (search?.Length > 0) {
-                names = names.Where(x => x.Text.ToLower().Contains(HttpUtility.UrlDecode(search).ToLower()));
+            if (contains?.Length > 0) {
+                names = names.Where(x => x.Text.ToLower().Contains(HttpUtility.UrlDecode(contains).ToLower()));
+            }
+
+            if (startsWith?.Length > 0) {
+                names = names.Where(x => x.Text.ToLower().StartsWith(HttpUtility.UrlDecode(startsWith).ToLower()));
+            }
+
+            if (endsWith?.Length > 0) {
+                names = names.Where(x => x.Text.ToLower().EndsWith(HttpUtility.UrlDecode(endsWith).ToLower()));
             }
 
             if (vib > 0) {
                 names = names.Where(x => x.Vibration.Vibration == vib);
             }
 
-            if (sex != null) {
-                if (sex == 1) {
+            if (maxLength > 0) {
+                names = names.Where(x => x.Text.Length <= maxLength);
+            }
+
+            if (minLength > 0) {
+                names = names.Where(x => x.Text.Length >= minLength);
+            }
+
+            if (sex.ToLower() == "female") {
                     names = names.Where(x => x.Female == true);
-                } else if (sex == 0) {
+            } else if (sex.ToLower() == "male") {
                     names = names.Where(x => x.Male == true);
-                }
+            } else if (sex.ToLower() == "both") {
+                    names = names.Where(x => x.Female == true && x.Male == true);
             }
             
             return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());

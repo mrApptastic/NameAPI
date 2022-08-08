@@ -479,7 +479,7 @@ namespace NameBandit.Data {
                     "Grover Cleveland", "Benjamin Harrison", "William McKinley", "Theodore Roosevelt", "William Taft", "Woodrow Wilson", "Warren Harding", "Calvin Coolidge", 
                     "Herbert Hoover", "Franklin Roosevelt", "Harry Truman", "Dwight Eisenhower", "John Kennedy", "Lyndon Johnson", "Richard Nixon", "Gerald Ford", 
                     "Jimmy Carter", "George Bush", "Barack Obama", "Donald Trump", "Joe Biden", "Thomas Hardy", "Ian Fleming", "Charles Dickens", "Mary Shelley", "Lord Nelson", 
-                    "Charles Mason", "Jeremiah Dixon", "Thomas Edison", "Boy George", "David Bowie", "Elvis Presley", "Bob Paisley", "Miley Cyrus", "Stewie Wonder", 
+                    "Charles Mason", "Jeremiah Dixon", "Thomas Edison", "Boy George", "David Bowie", "Elvis Presley", "Bob Paisley", "Miley Cyrus", "Stevie Wonder", 
                     "Michael Owen", "Salman Rushdi", "Sofie Bonde", "Von Trier", "Kong Ramses", "King Solomon", "Papa Bue", "Mama Cass", "Steven Gerrard", "Smokey Robinson", 
                     "Hugh Grant", "Prince John", "King Richard", "Queen Mary", "Queen Elizabeth", "Prince Charles", "Prince William", "Princess Diana", "Prince Harry", 
                     "Bonny Tyler", "Lewis Carol", "Don Johnson", "Tom Cruise", "Benjamin Franklin", "Demi More", "Michael Douglas", "Bonnie Prince Charles", "Paris Hilton",
@@ -487,7 +487,7 @@ namespace NameBandit.Data {
                     "Herman Melville", "Antonio Vivaldi", "Dina Jewel", "Peter North", "Ron Jeremy", "Evan Stone", "Michael Keaton", "Michael Fox", "Bob Marley", "Ruby Dee",
                     "Jim Davis", "Viven Leigh", "Samantha Bee", "Margaret Cho", "Elizabeth Taylor", "Lucy Liu", "Agatha Christie", "George Eliot", "Marie Curie", "Carol King",
                     "Billie King", "Brune Mars", "Bent Fabricius Bjerre", "Nat King Cole", "Donna Summer", "Hanne Boel", "Anne Linett", "Cliff Richard", "Keith Richard", 
-                    "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi" };
+                    "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi", "Isaac Newton", "Kong Christian", "Kong Hans", "Kong Frederik" };
                 
                     foreach (var name in famousCombinations) {
                         string[] parts = name.Split(' ');
