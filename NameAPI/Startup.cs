@@ -7,11 +7,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using NameBandit.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NameBandit.Data;
+using NameBandit.Managers;
 
 namespace NameBandit
 {
@@ -27,6 +28,9 @@ namespace NameBandit
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<INamesManager, NamesManager>();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddControllers();
 

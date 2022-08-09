@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using NameBandit.Data;
 using NameBandit.Models;
+using NameBandit.Managers;
 
 namespace NameBandit.Controllers
 {
@@ -17,89 +18,56 @@ namespace NameBandit.Controllers
     [Route("[controller]")]
     public class NamesController : ControllerBase
     {
-
         private readonly ILogger<NamesController> _logger;
-        private readonly ApplicationDbContext _context;
+        private readonly INamesManager _manager;
 
-        public NamesController(ILogger<NamesController> logger, ApplicationDbContext context)
+        public NamesController(ILogger<NamesController> logger, INamesManager manager)
         {
             _logger = logger;
-            _context = context;
+            _manager = manager;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Name>>> Get(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength)
+        public async Task<ActionResult<ICollection<NameViewModel>>> Get(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength)
         {
-            var names = _context.Names.Include(x => x.Vibration).AsQueryable();
+            var nameList = await _manager.GetNames(HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength);
 
-            if (contains?.Length > 0) {
-                names = names.Where(x => x.Text.ToLower().Contains(HttpUtility.UrlDecode(contains).ToLower()));
-            }
+            return Ok(nameList);
+        }
 
-            if (startsWith?.Length > 0) {
-                names = names.Where(x => x.Text.ToLower().StartsWith(HttpUtility.UrlDecode(startsWith).ToLower()));
-            }
+        // [HttpGet("suggest")]
+        // public async Task<ActionResult<IEnumerable<Name>>> Suggest(int? vib, int? sex)
+        // {
+        //     var names = _context.Names.Include(x => x.Vibration).AsQueryable();
 
-            if (endsWith?.Length > 0) {
-                names = names.Where(x => x.Text.ToLower().EndsWith(HttpUtility.UrlDecode(endsWith).ToLower()));
-            }
+        //     if (vib > 0) {
+        //         names = names.Where(x => x.Vibration.Vibration == vib);
+        //     }
 
-            if (vib > 0) {
-                names = names.Where(x => x.Vibration.Vibration == vib);
-            }
-
-            if (maxLength > 0) {
-                names = names.Where(x => x.Text.Length <= maxLength);
-            }
-
-            if (minLength > 0) {
-                names = names.Where(x => x.Text.Length >= minLength);
-            }
-
-            if (sex.ToLower() == "female") {
-                    names = names.Where(x => x.Female == true);
-            } else if (sex.ToLower() == "male") {
-                    names = names.Where(x => x.Male == true);
-            } else if (sex.ToLower() == "both") {
-                    names = names.Where(x => x.Female == true && x.Male == true);
-            }
+        //     if (sex != null) {
+        //         if (sex == 1) {
+        //             names = names.Where(x => x.Female == true);
+        //         } else if (sex == 0) {
+        //             names = names.Where(x => x.Male == true);
+        //         }
+        //     }
             
-            return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
-        }
+        //     return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
+        // }
 
-        [HttpGet("suggest")]
-        public async Task<ActionResult<IEnumerable<Name>>> Suggest(int? vib, int? sex)
-        {
-            var names = _context.Names.Include(x => x.Vibration).AsQueryable();
+        // [HttpPost]
+        // public async Task<ActionResult<IEnumerable<Name>>> Search(Name name)
+        // {
 
-            if (vib > 0) {
-                names = names.Where(x => x.Vibration.Vibration == vib);
-            }
-
-            if (sex != null) {
-                if (sex == 1) {
-                    names = names.Where(x => x.Female == true);
-                } else if (sex == 0) {
-                    names = names.Where(x => x.Male == true);
-                }
-            }
+        //     var names = from n in _context.Names where n.Id == name.Id select n;
             
-            return Ok(await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
-        }
+        //     return Ok(await names.ToListAsync());
+        // }
 
-        [HttpPost]
-        public async Task<ActionResult<IEnumerable<Name>>> Search(Name name)
-        {
-
-            var names = from n in _context.Names where n.Id == name.Id select n;
-            
-            return Ok(await names.ToListAsync());
-        }
-
-        private async Task<Name> Generate() {
-            Random rand = new Random();
-            int toSkip = rand.Next(1, await _context.Names.CountAsync());
-            return await _context.Names.Skip(toSkip).Take(1).FirstOrDefaultAsync();
-        }
+        // private async Task<Name> Generate() {
+        //     Random rand = new Random();
+        //     int toSkip = rand.Next(1, await _context.Names.CountAsync());
+        //     return await _context.Names.Skip(toSkip).Take(1).FirstOrDefaultAsync();
+        // }
     }
 }
