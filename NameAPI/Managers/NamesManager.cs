@@ -64,8 +64,10 @@ namespace NameBandit.Managers
             } else if (sex?.ToLower() == "both") {
                     names = names.Where(x => x.Female == true && x.Male == true);
             }
+
+            var nameList = await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync();
             
-            return _mapper.Map<ICollection<Name>, ICollection<NameViewModel>>( await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync());
+            return _mapper.Map<ICollection<Name>, ICollection<NameViewModel>>(nameList);
         }
 
     }
