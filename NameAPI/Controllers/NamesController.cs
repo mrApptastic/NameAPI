@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using NameBandit.Data;
 using NameBandit.Models;
 using NameBandit.Managers;
+using System.Net;
+using System.Net.Sockets;
 
 namespace NameBandit.Controllers
 {
@@ -28,14 +30,28 @@ namespace NameBandit.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ICollection<NameViewModel>>> Get(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50)
+        public async Task<ActionResult<ICollection<NameViewModel>>> Get(string matches, string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50)
         {
-            var names =  await _manager.GetNames(HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength, category, page = 1, take = 50);
+            var names =  await _manager.GetNames(HttpUtility.UrlDecode(matches), HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength, category, page = 1, take = 50);
             var nameList = names.results;
 
             Response.Headers.Add("X-Count", names.count.ToString());
 
             return Ok(nameList);
+        }
+
+        private static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            
+            return "";
         }
 
         // [HttpGet("suggest")]

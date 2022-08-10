@@ -13,7 +13,7 @@ using AutoMapper;
 namespace NameBandit.Managers
 {
 	public interface INamesManager {
-        Task<(ICollection<NameViewModel> results, int count)> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50);
+        Task<(ICollection<NameViewModel> results, int count)> GetNames(string matches, string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50);
 	}
 
     public class NamesManager: INamesManager
@@ -29,9 +29,13 @@ namespace NameBandit.Managers
             _context = context;
         }
 
-        public async Task<(ICollection<NameViewModel> results, int count)> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50)
+        public async Task<(ICollection<NameViewModel> results, int count)> GetNames(string matches, string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50)
         {
             var names = _context.Names.Include(x => x.Vibration).Include(x => x.Category).AsQueryable();
+
+            if (matches?.Length > 0) {
+                names = names.Where(x => x.Text.ToLower() == matches.ToLower());
+            }
 
             if (contains?.Length > 0) {
                 names = names.Where(x => x.Text.ToLower().Contains(contains.ToLower()));
