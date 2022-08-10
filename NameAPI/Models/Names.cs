@@ -15,8 +15,9 @@ namespace NameBandit.Models
         public bool Active { get; set; }
         public bool Prefix { get; set; }
         public bool Suffix { get; set; }
-        public VibrationNumber Vibration { get; set; }
 #nullable enable
+        public VibrationNumber? Vibration { get; set; }
+        public Category? Category { get; set; }
         public NameCombo? NameCombo { get; set; }
 #nullable disable
     }
@@ -48,6 +49,7 @@ namespace NameBandit.Models
                 .ForMember(dest => dest.Prefix, opts => opts.Ignore())
                 .ForMember(dest => dest.Suffix, opts => opts.Ignore())
                 .ForMember(dest => dest.Vibration, opts => opts.Ignore())
+                .ForMember(dest => dest.Category, opts => opts.Ignore())
                 .ForMember(dest => dest.NameCombo, opts => opts.Ignore());
 
         }

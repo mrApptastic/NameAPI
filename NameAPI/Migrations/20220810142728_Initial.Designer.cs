@@ -9,8 +9,8 @@ using NameBandit.Data;
 namespace NameBandit.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220807150930_initial")]
-    partial class initial
+    [Migration("20220810142728_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -162,7 +162,7 @@ namespace NameBandit.Migrations
 
             modelBuilder.Entity("NameBandit.Models.Name", b =>
                 {
-                    b.HasOne("NameBandit.Models.Category", null)
+                    b.HasOne("NameBandit.Models.Category", "Category")
                         .WithMany("Names")
                         .HasForeignKey("CategoryId");
 

@@ -13,7 +13,7 @@ using AutoMapper;
 namespace NameBandit.Managers
 {
 	public interface INamesManager {
-        Task<ICollection<NameViewModel>> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength);
+        Task<(ICollection<NameViewModel> results, int count)> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50);
 	}
 
     public class NamesManager: INamesManager
@@ -29,9 +29,9 @@ namespace NameBandit.Managers
             _context = context;
         }
 
-        public async Task<ICollection<NameViewModel>> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength)
+        public async Task<(ICollection<NameViewModel> results, int count)> GetNames(string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, int page = 1, int take = 50)
         {
-            var names = _context.Names.Include(x => x.Vibration).AsQueryable();
+            var names = _context.Names.Include(x => x.Vibration).Include(x => x.Category).AsQueryable();
 
             if (contains?.Length > 0) {
                 names = names.Where(x => x.Text.ToLower().Contains(contains.ToLower()));
@@ -65,9 +65,15 @@ namespace NameBandit.Managers
                     names = names.Where(x => x.Female == true && x.Male == true);
             }
 
-            var nameList = await names.Where(x => x.Active).OrderBy(x => x.Text).ToListAsync();
+           if (category > 0) {
+                names = names.Where(x => x.Category.Id == category);
+           }
+
+            int count = await names.CountAsync();
+
+            var nameList = await names.Where(x => x.Active).OrderBy(x => x.Text).Skip((page -1) * take).Take(take).ToListAsync();
             
-            return _mapper.Map<ICollection<Name>, ICollection<NameViewModel>>(nameList);
+            return (_mapper.Map<ICollection<Name>, ICollection<NameViewModel>>(nameList), count);
         }
 
     }

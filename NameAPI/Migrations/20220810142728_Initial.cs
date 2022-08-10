@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NameBandit.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,15 +77,15 @@ namespace NameBandit.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Text = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     Male = table.Column<bool>(nullable: false),
                     Female = table.Column<bool>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
                     Prefix = table.Column<bool>(nullable: false),
                     Suffix = table.Column<bool>(nullable: false),
                     VibrationId = table.Column<int>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    NameComboId = table.Column<int>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: true)
+                    CategoryId = table.Column<int>(nullable: true),
+                    NameComboId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -160,7 +160,7 @@ namespace NameBandit.Migrations
 
             modelBuilder.Entity("NameBandit.Models.Name", b =>
                 {
-                    b.HasOne("NameBandit.Models.Category", null)
+                    b.HasOne("NameBandit.Models.Category", "Category")
                         .WithMany("Names")
                         .HasForeignKey("CategoryId");
 
