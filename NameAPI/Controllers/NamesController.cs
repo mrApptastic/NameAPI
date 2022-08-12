@@ -1,18 +1,10 @@
-﻿using System;
 using System.Web;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using NameBandit.Data;
 using NameBandit.Models;
 using NameBandit.Managers;
-using System.Net;
-using System.Net.Sockets;
 
 namespace NameBandit.Controllers
 {
@@ -38,20 +30,6 @@ namespace NameBandit.Controllers
             Response.Headers.Add("X-Count", names.count.ToString());
 
             return Ok(nameList);
-        }
-
-        private static string GetLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-            
-            return "";
         }
 
         // [HttpGet("suggest")]
