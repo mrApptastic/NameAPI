@@ -32,7 +32,7 @@ namespace NameBandit.Controllers
             return Ok(nameList);
         }
 
-        [HttpGet("suggest")]
+        [HttpGet("Suggest")]
         public async Task<ActionResult<ICollection<Name>>> Suggest(string matches, string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, bool? title, bool? surname)
         {
             return Ok(await _manager.SuggestNames(HttpUtility.UrlDecode(matches), HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength, category, title, surname));
