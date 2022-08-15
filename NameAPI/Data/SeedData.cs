@@ -343,11 +343,36 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var greekMyhologyList = new List<string>() { "Zeus", "Muse", "Herkules", "Hercules", "Ares", "Afrodite", "Achilles", "Achilleus", "Hektor", "Hector", "Hera",
-                    "Herakles", "Atena", "Atene", "Athena", "Athene", "Troja", "Trojan", "Troy", "Briseis", "Olymp", "Olympe", "Olympia" };
+                    var greekMyhologyList = new List<string>() { "Achilles", "Achilleus", "Achlys", "Æolus", "Aether", "Afrodite", "Agamemnon", "Agathon", "Aia", "Aiakide", 
+                    "Aiakos", "Aias", "Aietes", "Aigeus", "Aigisthos", "Aineas", "Aineias", "Aion", "Akilles", "Alexandros", "Alkimos", "Alkinoos", "Alkmene", "Amphitryon", 
+                    "Amyntor", "Ananke", "Anchises", "Andromache", "Ankhises", "Antikleia", "Antilochos", "Antinoos", "Antiphonos", "Antiphos", "Anytos", "Aphrodite", "Apollo", 
+                    "Apollon", "Ares", "Arete", "Aretos", "Argos", "Arkeisios", "Artemis", "Asia", "Askalaphos", "Asteria", "Astraeus", "Astyanax", "Astyoche", "Astyocheia", 
+                    "Atena", "Atene", "Athena", "Athene", "Atlas", "Atreus", "Aurora", "Autolykos", "Bacchus", "Bellerophontes", "Briseis", "Brises", "Castor", "Cerberus", "Ceres",
+                    "Chaos", "Chloris", "Chromios", "Chronos", "Chryse", "Chryseis", "Chryses", "Chrysothemis", "Cincinnatus", "Circe", "Cloelia", "Clymene", "Coeus", "Collatina", 
+                    "Coriolanus", "Cosmo", "Cosmos", "Crius", "Cronus", "Cupido", "Cyclop", "Danae", "Deiphobos", "Demeter", "Demokoon", "Demophobos", "Deukalion", "Diana", 
+                    "Diomedes", "Dione", "Dionusos", "Dionysos", "Dionysus", "Dios", "Dorylkos", "Dymas", "Echemon", "Echephron", "Eileithyer", "Electra", "Elektra", "Eos", 
+                    "Ephialtes", "Epimetheus", "Erebus", "Erinnye", "Erinnys", "Eros", "Eudoros", "Eumaion", "Eumaios", "Eupeithes", "Eurybia", "Eurykleia", "Eurymachos", "Eurymome",
+                    "Eurypylos", "Fama", "Faunus", "Fønix", "Fortuna", "Gaea", "Gaia", "Glaukos", "Gorgythion", "Hades", "Hebe", "Hecate", "Hector", "Hekabe", "Hektor", "Helena", 
+                    "Helenos", "Helios", "Hemera", "Hephaestus", "Hephaistos", "Hera", "Herakles", "Hercules", "Here", "Hermes", "Hestia", "Hippodameia", "Hippolochos", "Homer", 
+                    "Horatius", "Hostilina", "Hyperion", "Hypnos", "Ialmenos", "Iapetus", "Idomeneus", "Ifigenia", "Ikarios", "Ikaros", "Ilos", "Iphianassa", "Iris", "Isos", 
+                    "Ithaka", "Ixions", "Janus", "Jugatinus", "Juno", "Jupiter", "Juvenas", "Kalchas", "Kalkas", "Kalypso", "Kaos", "Kapaneus", "Kassandra", "Kastor", "Kebriones", 
+                    "Kerberos", "Kerberus", "Kirke", "Klytaimestra", "Kore", "Kosmo", "Kosmos", "Kreta", "Kronos", "Kryse", "Kryseis", "Kryses", "Ktesios", "Ktimene", "Kyklop", 
+                    "Laertes", "Lampetia", "Laodameia", "Laodike", "Laomedon", "Lavinia", "Leda", "Lelantos", "Leto", "Lokris", "Luna", "Lykaon", "Lyrnessos", "Maia", "Mars", 
+                    "Medesikaste", "Megara", "Meges", "Melanthios", "Menelaos", "Menoetius", "Menoitios", "Mentor", "Mercury", "Meriones", "Merkur", "Metis", "Minerva", "Minos", 
+                    "Mnemosyne", "Molos", "Muse", "Mynes", "Nausikaa", "Nausithoos", "Neleus", "Nemesis", "Neoptolemos", "Neptun", "Nereider", "Nereus", "Nesoi", "Nestor", "Nodotus",
+                    "Nyx", "Oceanus", "Odysseus", "Ogygia", "Oileus", "Oineus", "Okeanos", "Olymp", "Olympe", "Olympia", "Ops", "Orenos", "Orestes", "Orion", "Orsilochos", "Otos", 
+                    "Ourea", "Pallas", "Panthoos", "Patellana", "Patroclos", "Patroklos", "Peirithoos", "Peisistratos", "Peleion", "Peleus", "Pelias", "Penelope", "Penelopeia", 
+                    "Penelopes", "Periboia", "Periklymenos", "Pero", "Perse", "Persephone", "Persephoneia", "Perses", "Perseus", "Persofone", "Phaethusa", "Phanes", "Phoebe", 
+                    "Phoenix", "Phoibos", "Phoinix", "Pluto", "Polites", "Pollux", "Polybos", "Polydamas", "Polydeukes", "Polydoros", "Polyfem", "Polykaste", "Polymele", 
+                    "Polypheides", "Polyphemos", "Polypoites", "Pontos", "Pontus", "Poseidon", "Priamos", "Prometheus", "Proserpina", "Pylos", "Remus", "Rexenor", "Rhea", 
+                    "Romulus", "Rusina", "Salamis", "Sarpedon", "Saturn", "Saturnus", "Scherie", "Segetina", "Seia", "Selene", "Semele", "Sibylle", "Silenus", "Silvia", 
+                    "Sparta", "Sthenelos", "Stratios", "Styx", "Syceus", "Tarpeia", "Tartarus", "Teiresias", "Telamon", "Telemachos", "Telemakos", "Tellus", "Tethys", "Teukros",
+                    "Thalassa", "Thaltybios", "Thanatos", "Theia", "Themis", "Theoklymenos", "Theseus", "Thessalien", "Thessalos", "Thetis", "Thoosa", "Thrasymedes", "Thyestes", 
+                    "Titan", "Tlepolemos", "Troja", "Trojan", "Troy", "Tydeus", "Tyndareus", "Tyro", "Ulysses", "Uranos", "Uranus", "Vallonia", "Venus", "Vesta", "Volutina", 
+                    "Vulcanos", "Zeus" };
 
                     var greekMyth = new Category() {
-                        Title = "Græsk Mytologi",
+                        Title = "Græsk og Romersk Mytologi",
                         Names = new List<Name>()
                     };
 
@@ -358,7 +383,14 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var norseMyhologyList = new List<string>() { "Thor", "Odin", "Loke", "Heimdal", "Frej", "Freja", "Frey", "Freya" };
+                    var norseMyhologyList = new List<string>() { "Alf", "Alvis", "Andhrimnir", "Andvari", "Angrboda", "Ask", "Astrilde", "Atla", "Austri", "Balder", "Baugi", 
+                    "Bil", "Bor", "Borghild", "Borr", "Brage", "Bragi", "Bur", "Buri", "Dagr", "Dellinger", "Donner", "Eir", "Eisa", "Elli", "Embla", "Eostre", "Fitch", 
+                    "Fjalar", "Foresti", "Frej", "Freja", "Frey", "Freya", "Frig", "Frigg", "Frigga", "Fulla", "Garm", "Geirod", "Gejfun", "Gerd", "Grid", "Groa", "Gudrun", 
+                    "Gunnar", "Hagbard", "Harbor", "Heidrun", "Heimdal", "Heimdall", "Hel", "Hermod", "Hermodr", "Hildr", "Hler", "Hlin", "Hoenir", "Høner", "Hoor", "Hreidmar", 
+                    "Hrungnir", "Hugi", "Hulda", "Idun", "Idunn", "Joro", "Kvasir", "Laga", "Lofn", "Loke", "Loki", "Lounn", "Magne", "Magni", "Mani", "Mimer", "Mimir", "Modi", 
+                    "Nana", "Nanna", "Nerthus", "Njord", "Nott", "Odin", "Orvar", "Othin", "Ran", "Rindr", "Saga", "Sif", "Signe", "Signy", "Sigrun", "Sigurd", "Sigyn", 
+                    "Sindre", "Sindri", "Siv", "Sjofn", "Skadi", "Skuld", "Snotra", "Svanhild", "Syn", "Thor", "Tiki", "Tor", "Tyr", "Ull", "Urd", "Vali", "Var", "Ve", 
+                    "Verdandi", "Vidar", "Vor", "Weth", "Wotan", "Ydun", "Yggdrasil", "Yngve", "Yngvi" };
 
                         var norseMyth = new Category() {
                         Title = "Nordisk Mytologi",
