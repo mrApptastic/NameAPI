@@ -418,8 +418,19 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var vikingsList = new List<string>() { "Agge", "Arne", "Arnfast", "Arv", "Asbjørn", "Asger", "Asgrim", "Aslak", "Asmund", "Birger", "Bjarke", "Bjarne",
-                    "Brune", "Bue", "Dagfinn", "Ebbe", "Eglin", "Eilif", "Einer", "Einar", "Einer", "Einar", "Eivind", "Ejvind", "Sven", "Palnatoke", "Toke"};
+                    var vikingsList = new List<string>() { "Agge", "Alva", "Aage", "Aase", "Åge", "Alfhild", "Alfred", "Alfride", "Alvide", "Åmund", "Anker", "Arne ", 
+                    "Arnfast", "Arv ", "Asa", "Asbjørn", "Åse", "Asger", "Asgrim", "Aslak", "Aslaug", "Asmund", "Astrid", "Bergljot", "Birger", "Birk", "Bjarke", "Bjarne", 
+                    "Bjørg", "Björk", "Bjørk", "Brune", "Brynhilde", "Bue", "Dagfinn", "Ebbe", "Eglin", "Eilif", "Einar", "Einer", "Eivind", "Ejvind", "Ellida", "Erik", 
+                    "Erland", "Eske", "Eskil", "Eskild", "Estrid", "Fenge", "Find", "Finn", "Folke", "Frej", "Frida", "Frigg", "Frigga", "Frode", "Fryd", "Fylla", "Gerd", 
+                    "Gertrud", "Gesemi", "Godfred", "Gorm", "Grim", "Gro", "Gudbrand", "Gudfred", "Gudrun", "Gunhild", "Gunløg", "Gunnar", "Gunner", "Gunver", "Gyda", "Gyde", 
+                    "Gyrithe", "Håkon", "Halfdan", "Halgerd", "Halgrim", "Halthor", "Harald", "Hede", "Helga", "Helge", "Helmer", "Herdis", "Herluf", "Hilda", "Hildegunn", 
+                    "Hjalte", "Holger", "Holmfrid", "Horik", "Høskul", "Høskuld", "Hulda", "Ida", "Ide", "Idun", "Inge", "Ingeborg", "Ingegerd", "Ingolf", "Ingvar", "Ivar", 
+                    "Iver", "Kåre", "Ketil", "Knud", "Lauge", "Leif", "Liv", "Lykke", "Nana", "Nanna", "Odger", "Oluf", "Øsser", "Osvald", "Ottar", "Palnatoke", "Ragna", 
+                    "Ragnhild", "Ragnvald", "Ralf", "Randi", "Rane", "Ranveig", "Regin", "Reginfred", "Regnar", "Regner", "Revna", "Riga", "Rigborg", "Roar", "Rolf", "Rørik", 
+                    "Røskva", "Runa", "Rune", "Sævil", "Saga", "Siff", "Sigfred", "Sigmund", "Signe", "Signild", "Sigrid", "Sigurd", "Sigvald", "Sigvar", "Skjalm", "Skjold", 
+                    "Skuld", "Snorre", "Snorri", "Starkodder", "Stig", "Stygger", "Sune", "Sven", "Svend", "Sverre", "Thøger", "Thora", "Thorbjørn", "Thore", "Thorgerd", 
+                    "Thorkild", "Thorleif", "Thormod", "Thorsten", "Thorvald", "Thyra", "Toke", "Torkil", "Tove", "Tristan", "Troels", "Trude", "Tryggve", "Trygve", "Tue", 
+                    "Tyre", "Uffe", "Ulf", "Unn", "Uth", "Vagn", "Valdemar", "Vedborg", "Vermund", "Vifil", "Vigdis", "Viggo", "Vilja" };
 
                         var vikings = new Category() {
                         Title = "Nordiske Navne",
@@ -707,7 +718,8 @@ namespace NameBandit.Data {
                     "Herman Melville", "Antonio Vivaldi", "Dina Jewel", "Peter North", "Ron Jeremy", "Evan Stone", "Michael Keaton", "Michael Fox", "Bob Marley", "Ruby Dee",
                     "Jim Davis", "Viven Leigh", "Samantha Bee", "Margaret Cho", "Elizabeth Taylor", "Lucy Liu", "Agatha Christie", "George Eliot", "Marie Curie", "Carol King",
                     "Billie King", "Brune Mars", "Bent Fabricius Bjerre", "Nat King Cole", "Donna Summer", "Hanne Boel", "Anne Linett", "Cliff Richard", "Keith Richard", 
-                    "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi", "Isaac Newton", "Kong Christian", "Kong Hans", "Kong Frederik" };
+                    "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi", "Isaac Newton", "Kong Christian", "Kong Hans", "Kong Frederik", "Richard Ragnvald",
+                    "Peter Regin" };
                 
                     foreach (var name in famousCombinations) {
                         string[] parts = name.Split(' ');
