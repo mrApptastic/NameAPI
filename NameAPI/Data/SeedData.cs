@@ -418,10 +418,11 @@ namespace NameBandit.Data {
                         }                   
                     }
                     
-                    var vikingsList = new List<string>() { "Sven", "Palnatoke", "Toke" };
+                    var vikingsList = new List<string>() { "Agge", "Arne", "Arnfast", "Arv", "Asbjørn", "Asger", "Asgrim", "Aslak", "Asmund", "Birger", "Bjarke", "Bjarne",
+                    "Brune", "Bue", "Dagfinn", "Ebbe", "Eglin", "Eilif", "Einer", "Einar", "Einer", "Einar", "Eivind", "Ejvind", "Sven", "Palnatoke", "Toke"};
 
                         var vikings = new Category() {
-                        Title = "Vikingenavne",
+                        Title = "Nordiske Navne",
                         Names = new List<Name>()
                     };
 
