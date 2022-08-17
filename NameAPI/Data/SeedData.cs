@@ -666,7 +666,7 @@ namespace NameBandit.Data {
                     "The Man", "Strange Viking", "Strange Willy", "The Willy", "The Viking", "Gordon Gekko", "Tom Barnaby", "John Barnaby", "Nice Pixie", "Pixie Girl", 
                     "Rocket Pixie", "Pixie Bunny", "New York", "Ninja Girl", "Peter Pan", "Snake Eyess", "Joe Dalton", "Ma Dalton", "Ice Man", "John Connor", "Pixie Ninja", 
                     "Sir Lancelot",  "Awesome Boy", "Nice Boy", "Strange Boy", "King Kong", "Indiana Jones", "Wolf Man", "Baba Papa", "Bjørne Bandit", "Fin Raziel", 
-                    "Bonny Lass", "Bonnie Girl" };
+                    "Bonny Lass", "Bonnie Girl", "Sandy Dee" };
                 
                     foreach (var name in funnyCombinations) {
                         string[] parts = name.Split(' ');
@@ -719,7 +719,8 @@ namespace NameBandit.Data {
                     "Jim Davis", "Viven Leigh", "Samantha Bee", "Margaret Cho", "Elizabeth Taylor", "Lucy Liu", "Agatha Christie", "George Eliot", "Marie Curie", "Carol King",
                     "Billie King", "Brune Mars", "Bent Fabricius Bjerre", "Nat King Cole", "Donna Summer", "Hanne Boel", "Anne Linett", "Cliff Richard", "Keith Richard", 
                     "Mick Jagger", "Peter Andre", "Eddy Grant", "Billy Idol", "Bon Jovi", "Isaac Newton", "Kong Christian", "Kong Hans", "Kong Frederik", "Richard Ragnvald",
-                    "Peter Regin" };
+                    "Peter Regin", "Kiki Dee", "Billy The Kid", "Pat Garrett", "Wyatt Earp", "Jesse James", "Butch Cassidy", "Belle Star", "Bob Dalton", "Grat Dalton", 
+                    "Bill Dalton", "Emmett Dalton", "Lewis Powell", "George Armstrong Custer" };
                 
                     foreach (var name in famousCombinations) {
                         string[] parts = name.Split(' ');
