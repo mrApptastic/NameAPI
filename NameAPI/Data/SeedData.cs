@@ -404,8 +404,11 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var arabianNightsList = new List<string>() { "Aladdin", "Gulnare" };
-
+                    var arabianNightsList = new List<string>() { "Ahmed", "Al", "Aladdin", "Alasnam", "Ali", "Asnam", "Baba", "Bacbouc", "Badroulbadour", "Bakbuk", "Billah", 
+                    "Cassim", "Dinarzad", "Dinazade", "Djinni", "Douban", "Duban", "Dunyazad", "Dunyazade", "Dunyazatde", "Fakik", "Gulnare", "Haddar", "Hussain", "Jafar", 
+                    "Jinni", "Kuz", "Maruf", "Morgiana", "Mustensir", "Nouronnihar", "Or", "Schahryar", "Scheherazade", "Shah", "Shaharyar", "Shaheryar", "Shahrayar", 
+                    "Shahrazad", "Shahrear", "Shahriar", "Shahriyar", "Shahryar", "Shakashik", "Shar", "Shariar", "Sheharyar", "Sinbad", "Sindibad", "Yunan", "Zaman", "Zeyn", 
+                    "Zumurrud" };
                         var arabianNights = new Category() {
                         Title = "1001 Nats Eventyr",
                         Names = new List<Name>()
