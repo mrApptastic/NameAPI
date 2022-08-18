@@ -25,7 +25,7 @@ namespace NameBandit.Data {
                     names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/drenge.htm"); 
                     names = ScrapingHelper.ScapeNames(names, "http://www.urd.dk/fornavne/piger.htm", true);
 
-                    names = ScrapingHelper.ScapeNames2(names);
+                    // names = ScrapingHelper.ScapeNames2(names);
 
                     foreach (var name in names) {
                         int vibration = CalculationHelper.CalculateNameVibration(name.Text);

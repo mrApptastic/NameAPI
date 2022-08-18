@@ -23,6 +23,7 @@ namespace NameBandit
         {
             services.AddScoped<ICategoriesManager, CategoriesManager>();
             services.AddScoped<INamesManager, NamesManager>();
+            services.AddScoped<INameCombosManager, NameCombosManager>();
             services.AddScoped<IVibrationsManager, VibrationsManager>();
 
             services.AddAutoMapper(typeof(Startup));

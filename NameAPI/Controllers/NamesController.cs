@@ -14,11 +14,13 @@ namespace NameBandit.Controllers
     {
         private readonly ILogger<NamesController> _logger;
         private readonly INamesManager _manager;
+        private readonly INameCombosManager _comboManager;
 
-        public NamesController(ILogger<NamesController> logger, INamesManager manager)
+        public NamesController(ILogger<NamesController> logger, INamesManager manager, INameCombosManager comboManager)
         {
             _logger = logger;
             _manager = manager;
+            _comboManager = comboManager;
         }
 
         [HttpGet]
@@ -36,6 +38,12 @@ namespace NameBandit.Controllers
         public async Task<ActionResult<ICollection<Name>>> Suggest(string matches, string contains, string startsWith, string endsWith, string sex, int? vib, int? maxLength, int? minLength, int? category, bool? title, bool? surname)
         {
             return Ok(await _manager.SuggestNames(HttpUtility.UrlDecode(matches), HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength, category, title, surname));
+        }
+
+        [HttpGet("SuggestCombo")]
+        public async Task<ActionResult<ICollection<Name>>> SuggestCombo(int? category)
+        {
+            return Ok(await _comboManager.SuggestNameCombinations(category));
         }
     }
 }
