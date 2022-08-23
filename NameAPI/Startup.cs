@@ -40,7 +40,8 @@ namespace NameBandit
                 builder =>{
                     builder.AllowAnyOrigin()
                             .AllowAnyMethod()
-                            .AllowAnyHeader();
+                            .AllowAnyHeader()
+                            .WithExposedHeaders("X-Count");
                 });
             });
 
