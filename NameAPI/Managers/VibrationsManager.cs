@@ -28,7 +28,7 @@ namespace NameBandit.Managers
 
         public async Task<ICollection<VibrationNumberViewModel>> GetAllVibrations()
         {
-            var vibrationList = await _context.NameVibrationNumbers.OrderBy(x => x.Title).ToListAsync();
+            var vibrationList = await _context.NameVibrationNumbers.OrderBy(x => x.Vibration).ThenBy(x => x.Destiny).ToListAsync();
             
             return _mapper.Map<ICollection<VibrationNumber>, ICollection<VibrationNumberViewModel>>(vibrationList);
         }
