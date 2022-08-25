@@ -536,7 +536,7 @@ namespace NameBandit.Data {
                     }
                     
                     var plantsList = new List<string>() { "Hyben", "Mynte", "Solsikke", "Birk", "Amaryllis", "Hyachint", "Eg", "Viol", "Rose", "Oregano", "Timian", "Persille", 
-                    "Lavendel", "Kløver", "Rosmarin", "Sweetpea" };
+                    "Lavendel", "Kløver", "Rosmarin", "Sweetpea", "Orkide", "Mint" };
 
                         var plants = new Category() {
                         Title = "Planteriget",
@@ -565,7 +565,7 @@ namespace NameBandit.Data {
                     }
                     
                     var coloursList = new List<string>() { "Gul", "Violet", "Azur", "Blå", "Brun", "Cyan", "Grå", "Grøn", "Hvid", "Indigo", "Lilla", "Lyserød", "Pink", "Okker", 
-                    "Purpur", "Rosa", "Rød", "Sort", "Umbra", "Lime", "Lyseblå", "Lysegrøn", "Orange" };
+                    "Purpur", "Rosa", "Rød", "Sort", "Umbra", "Lime", "Lyseblå", "Lysegrøn", "Orange", "Magenta", "Akva" };
 
                         var colours = new Category() {
                         Title = "Farver",
