@@ -48,13 +48,13 @@ namespace NameBandit.Managers
             List<Name> nameList = new List<Name>() { name };
 
             if (title == true) {
-                Name prefix = await Generate(null, null, null, null, null, null, null, null, null, true);
+                Name prefix = await Generate(null, null, null, null, sex, null, null, null, null, true);
 
                 nameList.Insert(0, prefix);
             }
 
-            if (title == true) {
-                Name suffix = await Generate(null, null, null, null, null, null, null, null, null, null, true);
+            if (surname == true) {
+                Name suffix = await Generate(null, null, null, null, sex, null, null, null, null, null, true);
 
                 nameList.Add(suffix);
             }

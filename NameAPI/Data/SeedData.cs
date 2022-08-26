@@ -679,11 +679,14 @@ namespace NameBandit.Data {
                         for (int i = 0; i < parts.Count(); i++) {
                             var part = parts[i];
                             var ibbermand = context.Names.Where(x => x.Text == part).FirstOrDefault();
+                            bool? gender = null;
 
                             if (ibbermand != null) {
-                                if (i != 0) {
+                                if (i != 0 && gender == ibbermand.Female) {
                                     ibbermand.Suffix = true;
-                                } 
+                                } else {
+                                    gender = ibbermand.Female;
+                                }
 
                                  funnyList.Add(new NamePrio() {
                                     Name = ibbermand,
@@ -733,11 +736,14 @@ namespace NameBandit.Data {
                         for (int i = 0; i < parts.Count(); i++) {
                             var part = parts[i];
                             var ibbermand = context.Names.Where(x => x.Text == part).FirstOrDefault();
+                            bool? gender = null;
 
                             if (ibbermand != null) {
-                                if (i != 0) {
+                                if (i != 0 && gender == ibbermand.Female) {
                                     ibbermand.Suffix = true;
-                                } 
+                                } else {
+                                    gender = ibbermand.Female;
+                                }
 
                                 famousList.Add(new NamePrio() {
                                     Name = ibbermand,
