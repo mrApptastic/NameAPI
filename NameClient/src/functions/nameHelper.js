@@ -25,47 +25,47 @@ export async function getNames(
   let url = 'https://names.tesj.dk/Names';
 
   if (matches?.length > 0) {
-    url += "&matches" = matches;
+    url += '&matches=' + matches;
   }
 
   if (contains?.length > 0) {
-    url += "&contains" = contains;
+    url += '&contains=' + contains;
   }
 
   if (startsWith?.length > 0) {
-    url += "&startsWith" = startsWith;
+    url += '&startsWith=' + startsWith;
+  }
+
+  if (endsWith?.length > 0) {
+    url += '&endsWith=' + endsWith;
   }
 
   if (sex?.length > 0) {
-    url += "&endsWith" = endsWith;
-  }
-
-  if (sex?.length > 0) {
-    url += "&sex" = sex;
+    url += '&sex=' + sex;
   }
 
   if (vib) {
-    url += "&vib" = vib;
+    url += '&vib=' + vib;
   }
 
   if (maxLength) {
-    url += "&maxLength" = maxLength;
+    url += '&maxLength=' + maxLength;
   }
 
   if (minLength) {
-    url += "&minLength" = minLength;
+    url += '&minLength=' + minLength;
   }
 
   if (category) {
-    url += "&category" = category;
+    url += '&category=' + category;
   }
 
   if (page) {
-    url += "&page" = page;
+    url += '&page=' + page;
   }
 
   if (take) {
-    url += "&take" = take;
+    url += '&take=' + take;
   }
 
   const response = await fetch(url.replace('&', '?'), {
@@ -94,48 +94,48 @@ export async function suggestNames(
   let url = 'https://names.tesj.dk/Names/Suggest';
 
   if (matches?.length > 0) {
-    url += "&matches" = matches;
+    url += '&matches=' + matches;
   }
 
   if (contains?.length > 0) {
-    url += "&contains" = contains;
+    url += '&contains=' + contains;
   }
 
   if (startsWith?.length > 0) {
-    url += "&startsWith" = startsWith;
+    url += '&startsWith=' + startsWith;
+  }
+
+  if (endsWith?.length > 0) {
+    url += '&endsWith=' + endsWith;
   }
 
   if (sex?.length > 0) {
-    url += "&endsWith" = endsWith;
-  }
-
-  if (sex?.length > 0) {
-    url += "&sex" = sex;
+    url += '&sex=' + sex;
   }
 
   if (vib) {
-    url += "&vib" = vib;
+    url += '&vib=' + vib;
   }
 
   if (maxLength) {
-    url += "&maxLength" = maxLength;
+    url += '&maxLength=' + maxLength;
   }
 
   if (minLength) {
-    url += "&minLength" = minLength;
+    url += '&minLength=' + minLength;
   }
 
   if (category) {
-    url += "&category" = category;
+    url += '&category=' + category;
   }
 
-  // if (title?.toString().length > 0) {
-  //   url += "&surname" = surname;
-  // }
+  if (title === true) {
+    url += '&title=' + title;
+  }
 
-  // if (surname?.toString().length > 0) 
-  //   url += "&surname" = surname;
-  // }
+  if (surname === true) {
+    url += '&surname=' + surname;
+  }
 
   const response = await fetch(url.replace('&', '?'), {
     method: 'GET',
@@ -151,7 +151,7 @@ export async function suggestCombos(category) {
   let url = 'https://names.tesj.dk//Names/SuggestCombo';
 
   if (category) {
-    url += "?category" = category;
+    url += '&category=' + category;
   }
 
   const response = await fetch(url, {
@@ -163,7 +163,6 @@ export async function suggestCombos(category) {
   });
   return response.json();
 }
-
 
 export async function getVibrations() {
   const response = await fetch('https://names.tesj.dk//Vibrations', {
