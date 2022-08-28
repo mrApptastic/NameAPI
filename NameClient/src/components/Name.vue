@@ -8,15 +8,15 @@
     </div>
     <div class="card-body">
       <p class="card-text">
-        <div v-if="name?.description">
+        <span v-if="name?.description">
           <h4>Beskrivelse:</h4>
-          <span>{{ name?.description }}</span>      
-        </div>
-        <div v-if="name?.vibrationNumber">
+          <span v-html="name?.description"></span>      
+        </span>
+        <span v-if="name?.vibrationNumber">
           <h4>Vibrationstal: {{name?.vibrationNumber?.vibration}} ({{name?.vibrationNumber?.destiny}})</h4>
           <h5>{{name?.vibrationNumber?.title}}</h5>
-          <span>{{name?.vibrationNumber?.description }}</span>      
-        </div>
+          <span v-html="name?.vibrationNumber?.description"></span>      
+        </span>
       </p>
     </div>
   </div>
