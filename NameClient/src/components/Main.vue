@@ -5,29 +5,34 @@
       <a class="nav-link" v-bind:class="selectedView === 'search' ? 'active' : ''" v-on:click="selectedView = 'search'">Søg</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" v-on:click="selectedView = 'suggest'">Foresl&aring;</a>
+      <a class="nav-link" v-bind:class="selectedView === 'suggest' ? 'active' : ''"  v-on:click="selectedView = 'suggest'">Foresl&aring;</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" v-on:click="selectedView = 'combo'">Kombinationer</a>
+      <a class="nav-link" v-bind:class="selectedView === 'combo' ? 'active' : ''"  v-on:click="selectedView = 'combo'">Kombinationer</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" v-on:click="selectedView = 'numerology'">Numerologi</a>
+      <a class="nav-link" v-bind:class="selectedView === 'numerology' ? 'active' : ''"  v-on:click="selectedView = 'numerology'">Numerologi</a>
     </li>
   </ul>
   <div class="container-fluid">
-    <Search />
+    <Search v-if="selectedView === 'search'" />
+    <Suggest v-if="selectedView === 'suggest'" />
+    <Combo v-if="selectedView === 'combo'" />
   </div>
-
 </div>
 </template>
 
 <script>
 import Search from './Search.vue';
+import Suggest from './Suggest.vue';
+import Combo from './Combo.vue';
 
 export default {
   name: 'Main',
   components: {
     Search,
+    Suggest,
+    Combo
   },
   data: function () {
     return {

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <form class="row" v-on:submit="(event) => searchNames(event)">
-      <div class="col-sm-6">          
-          <input class="form-control" type="text" v-model="searchText" placeholder="Søg Navne" />
+    <form class="row" v-on:submit="(event) => suggestName(event)">
+      <div class="col-sm-6"> 
+        <input class="form-control" type="text" v-model="suggestText" placeholder="Foresl&aring; Navn" />
       </div>
       <div class="col-sm-4">
         <select class="form-control" v-model="selectedSearchMethod">
@@ -13,8 +13,8 @@
         </select>
       </div>
       <div class="col-sm-2">
-        <button class="btn btn-primary" type="submit" v-bind:disabled="searching">Søg</button>
-      </div>
+        <button class="btn btn-primary" type="submit">Foresl&aring;</button>
+      </div>            
     </form>
     <div class="row">
       <div class="col-sm-4">
@@ -34,7 +34,8 @@
           <option
             v-for="vibration in vibrations"
             v-bind:key="vibration.vibration"
-            v-bind:value="vibration.vibration">
+            v-bind:value="vibration.vibration"
+          >
             {{ vibration?.vibration }} - {{ vibration?.destiny }} -
             {{ vibration?.title }}
           </option>
@@ -74,10 +75,7 @@
       </div>
     </div>
     <div v-if="searching">
-      <div class="text-center">
-        <div class="spinner-border text-primary"></div>
-        <div>Søger...</div>
-      </div>
+      <Spinner />
     </div>
     <div v-if="names && !searching" class="row">
       <div
@@ -93,16 +91,18 @@
 <script>
 import * as helper from '../functions/nameHelper.js';
 import Name from './Name.vue';
+import Spinner from './Spinner.vue';
 
 export default {
-  name: 'Search',
+  name: 'Suggest',
   components: {
     Name,
+    Spinner,
   },
   data: function () {
     return {
-      searching: false,
-      searchText: '',
+      searching: false, 
+      suggestText: '',
       categories: new Array(),
       names: new Array(),
       vibrations: new Array(),
@@ -115,15 +115,15 @@ export default {
     };
   },
   methods: {
-    searchNames: function (event) {
+    suggestName: function (event) {
       event.preventDefault();
       this.searching = true;
       helper
-        .getNames(
-          this.selectedSearchMethod === 'matches' ? this.searchText : null,
-          this.selectedSearchMethod === 'contains' ? this.searchText : null,
-          this.selectedSearchMethod === 'startsWith' ? this.searchText : null,
-          this.selectedSearchMethod === 'endsWidth' ? this.searchText : null,
+        .suggestNames(
+          this.selectedSearchMethod === 'matches' ? this.suggestText : null,
+          this.selectedSearchMethod === 'contains' ? this.suggestText : null,
+          this.selectedSearchMethod === 'startsWith' ? this.suggestText : null,
+          this.selectedSearchMethod === 'endsWidth' ? this.suggestText : null,
           this.selectedGender,
           this.selectedVibration,
           this.maxLength,
@@ -132,14 +132,19 @@ export default {
         )
         .then(
           (x) => {
-            this.names = x;
-            this.searching = false;
-          },
-          (e) => {
-            console.log(e);
-            this.searching = false;
-          }
-        );
+            if (x?.length > 0 && x[0].text) {
+              this.names = x;
+            } else {
+              this.names = new Array();
+            }          
+          })
+        .catch((e) => {
+          console.log(e);
+          this.names = new Array();
+        }
+      ).finally(() => {
+        this.searching = false;
+      });
     }
   },
   mounted() {
