@@ -9,7 +9,10 @@
             Foreslå kombination
           </button>
         </div>
-        <div v-if="names" class="row">
+        <div class="w-100" v-if="searching">
+          <Spinner />
+        </div>
+        <div v-if="names && !searching" class="row">
           <div
             class="col-md-4 col-lg-3"
             v-for="name in names"
@@ -24,14 +27,17 @@
   <script>
   import * as helper from '../functions/nameHelper.js';
   import Name from './Name.vue';
+  import Spinner from './Spinner.vue';
   
   export default {
     name: 'Combo',
     components: {
       Name,
+      Spinner,
     },
     data: function () {
       return {
+        searching: false,
         selectedCategory: 0,
         categories: new Array(),
         names: new Array(),
@@ -39,14 +45,19 @@
     },
     methods: {
       suggestCombo: function () {
-        helper.suggestCombos().then(
-          (x) => {
+        this.searching = true;
+        helper.suggestCombos().then((x) => {
+          if (x?.length > 0 && x[0].text) {
             this.names = x;
-          },
-          (e) => {
-            console.log(e);
-          }
-        );
+          } else {
+            this.names = new Array();
+          }          
+          }).catch((e) => {
+          console.log(e);
+          this.names = new Array();
+        }).finally(() => {
+          this.searching = false;
+        });
       },
     },
     mounted() {

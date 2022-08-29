@@ -74,10 +74,7 @@
       </div>
     </div>
     <div v-if="searching">
-      <div class="text-center">
-        <div class="spinner-border text-primary"></div>
-        <div>Søger...</div>
-      </div>
+      <Spinner />
     </div>
     <div v-if="names && !searching" class="row">
       <div
@@ -93,11 +90,13 @@
 <script>
 import * as helper from '../functions/nameHelper.js';
 import Name from './Name.vue';
+import Spinner from './Spinner.vue';
 
 export default {
   name: 'Search',
   components: {
     Name,
+    Spinner,
   },
   data: function () {
     return {
@@ -132,14 +131,19 @@ export default {
         )
         .then(
           (x) => {
-            this.names = x;
-            this.searching = false;
-          },
-          (e) => {
-            console.log(e);
-            this.searching = false;
-          }
-        );
+            if (x?.length > 0 && x[0].text) {
+              this.names = x;
+            } else {
+              this.names = new Array();
+            }          
+          })
+        .catch((e) => {
+          console.log(e);
+          this.names = new Array();
+        }
+      ).finally(() => {
+        this.searching = false;
+      });
     }
   },
   mounted() {
