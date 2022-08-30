@@ -18,6 +18,7 @@
     <Search v-if="selectedView === 'search'" />
     <Suggest v-if="selectedView === 'suggest'" />
     <Combo v-if="selectedView === 'combo'" />
+    <Numerology v-if="selectedView === 'numerology'" />
   </div>
 </div>
 </template>
@@ -26,13 +27,15 @@
 import Search from './Search.vue';
 import Suggest from './Suggest.vue';
 import Combo from './Combo.vue';
+import Numerology from './Numerology.vue';
 
 export default {
   name: 'Main',
   components: {
     Search,
     Suggest,
-    Combo
+    Combo,
+    Numerology
   },
   data: function () {
     return {
