@@ -1,9 +1,14 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-6">
         <input class="form-control" type="text" v-model="name" v-on:change="() => calculateVibration()" placeholder="Beregn Navne" />
-        {{vibration}}
+        {{nameVibrations}}
+      </div>
+      <div class="col-sm-6">
+        <input class="form-control" type="date" v-on:change="() => calculateEnergies()" v-model="birthday" />
+        {{birthday}}<br/>
+        {{baseEnergy}}
       </div>   
     </div>
   </div>
@@ -21,13 +26,47 @@ export default {
   data: function () {
     return {
       name: "",
-      vibration: 0,
+      birthday: new Date().toISOString().slice(0, 10),
+      nameVibrations: new Array(),
+      baseEnergy : 0,
+      monthEnergy: 0,
+      yearEnergy: 0,
       vibrations: new Array(),
     };
   },
   methods: {
     calculateVibration: function () {
-      this.vibration = number.calculateNameVibration(this.name);
+      this.nameVibrations = new Array();
+
+      const nameList = this.name.split(" ");
+
+      for (const name of nameList) {
+        let vib = number.calculateNameVibration(name);
+
+        if (vib < 10) {
+          vib += this.baseEnergy;
+        }
+
+        if (vib < 10) {
+          vib += 9;
+        }
+
+        const vibe = this.vibrations.find(x => x.vibration === vib);
+
+        this.nameVibrations.push({
+          name : name,
+          vibration : vibe
+        })
+      }
+      
+    },
+    calculateEnergies: function () {
+      const d = new Date(this.birthday).toISOString();
+      if (d?.length >= 10) {
+        this.baseEnergy = number.calculateCharacterSum(d.slice(8, 10));
+        this.monthEnergy = number.calculateCharacterSum(d.slice(5, 7));
+        this.yearEnergy = number.calculateCharacterSum(d.slice(0, 4));
+      }      
     }
   },
   mounted() {
