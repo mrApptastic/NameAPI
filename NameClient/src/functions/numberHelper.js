@@ -6,6 +6,7 @@ export function calculateNameVibration(name) {
         const letter = arr.charAt(i);
         sum += getVibrationByLetter(letter);
     }
+
     return sum;
   }
 

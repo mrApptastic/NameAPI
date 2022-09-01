@@ -2,7 +2,7 @@
   <div>
     <form class="row" v-on:submit="(event) => searchNames(event)">
       <div class="col-sm-6">          
-          <input class="form-control" type="text" v-model="searchText" placeholder="Søg Navne" />
+          <input class="form-control" type="text" v-model="searchText" placeholder="Søg Navn" />
       </div>
       <div class="col-sm-4">
         <select class="form-control" v-model="selectedSearchMethod">

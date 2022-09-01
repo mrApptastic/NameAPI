@@ -31,7 +31,8 @@
 
 <script>
 import * as helper from '../functions/nameHelper.js';
-import * as number from '../functions/numberHelper.js';
+import * as numberHelper from '../functions/numberHelper.js';
+import * as stringHelper from '../functions/stringHelper.js';
 import Name from './Name.vue';
 
 export default {
@@ -60,7 +61,7 @@ export default {
       const nameList = this.name.split(" ");
 
       for (const name of nameList) {
-        let vib = number.calculateNameVibration(name);
+        let vib = numberHelper.calculateNameVibration(name);
 
         if (vib < 10) {
           vib += this.baseEnergy;
@@ -73,7 +74,7 @@ export default {
         const vibe = this.vibrations.find(x => x.vibration === vib);
 
         this.nameVibrations.push({
-          text : name,
+          text : stringHelper.formatName(name),
           vibrationNumber : vibe
         })
       }
@@ -84,11 +85,15 @@ export default {
       if (d?.length >= 10) {
         this.baseDescription = null;
 
-        this.baseEnergy = number.calculateCharacterSum(d.slice(8, 10));
-        this.monthEnergy = number.calculateCharacterSum(d.slice(5, 7));
-        this.yearEnergy = number.calculateCharacterSum(d.slice(0, 4));
+        this.baseEnergy = numberHelper.calculateDigitSum(parseInt(d.slice(8, 10)));
+        this.monthEnergy = numberHelper.calculateDigitSum(parseInt(d.slice(5, 7)));
+        this.yearEnergy = numberHelper.calculateDigitSum(parseInt(d.slice(0, 4)));
 
-        const base = number.getBaseEnergy(this.baseEnergy);
+        if (this.baseEnergy > 9) {
+          this.baseEnergy = numberHelper.calculateDigitSum(this.baseEnergy);
+        }
+
+        const base = numberHelper.getBaseEnergy(this.baseEnergy);
 
         if (base) {
           this.baseDescription = {
@@ -100,6 +105,7 @@ export default {
     }
   },
   mounted() {
+    this.calculateEnergies();
     helper.getVibrations().then(
       (x) => {
         this.vibrations = x

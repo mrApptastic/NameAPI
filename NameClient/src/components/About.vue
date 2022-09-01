@@ -3,7 +3,10 @@
     <div class="row">
       <div class="col-sm-12">
         <h2>Om denne applikation</h2>
-        <p>Denne applikation er</p>
+        <p>Denne applikation interagerer med API'et NamesAPI:</p>
+        <a class="btn btn-primary" href="https://names.tesj.dk" target="_blank">Se Swagger Dokumentation</a>
+        <p>Alle navnene er gyldige danske navne pr. 1. september 2022.</p>
+        <p>Applikationen giver et indblik i hvor liberal og alligevel rigid den danske navnelovgivning er.</p>
       </div>
  
     </div>

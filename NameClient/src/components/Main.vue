@@ -13,12 +13,16 @@
     <li class="nav-item">
       <a class="nav-link" v-bind:class="selectedView === 'numerology' ? 'active' : ''"  v-on:click="selectedView = 'numerology'">Numerologi</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" v-bind:class="selectedView === 'about' ? 'active' : ''"  v-on:click="selectedView = 'about'">Om</a>
+    </li>
   </ul>
   <div class="container-fluid">
     <Search v-if="selectedView === 'search'" />
     <Suggest v-if="selectedView === 'suggest'" />
     <Combo v-if="selectedView === 'combo'" />
     <Numerology v-if="selectedView === 'numerology'" />
+    <About v-if="selectedView === 'about'" />
   </div>
 </div>
 </template>
@@ -28,6 +32,7 @@ import Search from './Search.vue';
 import Suggest from './Suggest.vue';
 import Combo from './Combo.vue';
 import Numerology from './Numerology.vue';
+import About from './About.vue';
 
 export default {
   name: 'Main',
@@ -35,7 +40,8 @@ export default {
     Search,
     Suggest,
     Combo,
-    Numerology
+    Numerology,
+    About
   },
   data: function () {
     return {
