@@ -610,7 +610,7 @@ namespace NameBandit.Data {
 
                     var titleList = new List<string>() { "Admiral", "Skipper", "Kong", "King", "Prince", "Queen", "Princess", "Lord", "Sir", "Brormand", "Farmand", 
                     "Skat", "Fru", "Viking", "Bror", "Lillebror", "Lillemor", "Lillesøster", "Søster", "Baron", "Earl", "Jarl", "Sherif", "Duke", "Doc", "Prior", "Boy", "Son", 
-                    "Kid", "Bonde", "Lady", "Papa", "Mama", "Bandit" };
+                    "Kid", "Bonde", "Lady", "Papa", "Mama", "Bandit", "Kaiser" };
 
                     var titles = new Category() {
                         Title = "Titler",
