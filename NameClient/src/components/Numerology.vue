@@ -5,9 +5,9 @@
         <label>Beregn vibrationstal:</label><br/>
         <em>Indtast dine navne</em>
         <input class="form-control" type="text" v-model="name" v-on:keyup="() => calculateVibration()" v-on:blur="() => calculateVibration()" placeholder="Beregn Navne" />
-        <div v-if="nameVibrations" class="row">
+        <div v-if="nameVibrations" style="margin-top: 3rem;" class="row">
           <div
-            class="col-md-4 col-lg-3"
+            class="col-md-6 col-lg-4"
             v-for="vibe in nameVibrations"
             v-bind:key="vibe.text">
             <Name v-bind:name="vibe" />
@@ -18,9 +18,9 @@
         <label>Beregn essens:</label><br/>
         <em>Indtast din fødselsdato</em>
         <input class="form-control" type="date" v-on:keyup="() => calculateVibration()" v-on:blur="() => calculateVibration()" v-model="birthday" />
-        <label>Grundenergi: {{baseEnergy}}</label><br/>
+        <label>Grundenergi: {{baseEnergy}}</label>&nbsp;<label>Månedsenergi: {{monthEnergy}}</label>&nbsp;<label>Årsenergi: {{yearEnergy}}</label>
         <div v-if="baseDescription" class="row">
-          <div class="col-md-4 col-lg-3">
+          <div class="col-md-12">
             <Name v-bind:name="baseDescription" />
           </div>
         </div>
@@ -32,11 +32,12 @@
 <script>
 import * as helper from '../functions/nameHelper.js';
 import * as number from '../functions/numberHelper.js';
+import Name from './Name.vue';
 
 export default {
   name: 'Numerology',
   components: {
-
+    Name,
   },
   data: function () {
     return {
