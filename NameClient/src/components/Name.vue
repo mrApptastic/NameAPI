@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <div class="card-header" v-bind:style="'background:' + (name?.gender === 'Both' ? 'lightgreen' : name?.gender === 'Male' ? 'lightblue' : 'lightpink')">
+    <div class="card-header" v-bind:style="'background:' + name?.gender ? (name?.gender === 'Both' ? 'lightgreen' : name?.gender === 'Male' ? 'lightblue' : 'lightpink') : 'lightgrey'">
       <span style="display: flex; justify-content: flex-end;">
-        <i class="fa-solid" v-bind:class="name?.gender === 'Both' ? 'fa-mercury' : name?.gender === 'Male' ? 'fa-mars' : 'fa-venus'"></i>
+        <i v-if="name?.gender" class="fa-solid" v-bind:class="name?.gender === 'Both' ? 'fa-mercury' : name?.gender === 'Male' ? 'fa-mars' : 'fa-venus'"></i>
       </span>
       <h2 class="card-title">{{ name?.text }}</h2>
     </div>

@@ -23,6 +23,17 @@ export function calculateCharacterSum(str) {
     return sum;
 }
 
+export function calculateDigitSum(value) {
+    let sum = 0;
+
+    while (value) {
+        sum += value % 10;
+        value = Math.floor(value / 10);
+    }
+
+    return sum;
+} 
+
 export function getBaseEnergy(energy) {
     switch(energy) {
         case 1: return `1'eren er meget selvstændig og original. Du har gode lederevner og trives med at være den, der bestemmer og sætter dagsordenen. En 1'er Leder i balance vil være god til at motivere og uddelegere arbejdet. Hvorimod en 1'er Leder i ubalance vil påtage sig alt arbejdet selv af frygt for, at andre ikke vil kunne leve op til 1'erens høje standarder. Derved kommer en 1'er i ubalance let til at knokle for meget.
