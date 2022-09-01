@@ -1,6 +1,5 @@
 <template>
   <div class="card">
-    {{name?.gender}}
     <div class="card-header" v-bind:style="'background:' + (name?.gender?.length > 0 ? name?.gender === 'Both' ? 'lightgreen' : name?.gender === 'Male' ? 'lightblue' : 'lightpink' : 'lightgrey')">
       <span style="display: flex; justify-content: flex-end;">
         <i v-if="name?.gender" class="fa-solid" v-bind:class="name?.gender === 'Both' ? 'fa-mercury' : name?.gender === 'Male' ? 'fa-mars' : 'fa-venus'"></i>
