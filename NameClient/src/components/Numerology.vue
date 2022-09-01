@@ -58,7 +58,7 @@ export default {
 
       this.nameVibrations = new Array();
 
-      const nameList = this.name.split(" ");
+      const nameList = this.name?.trim().split(' ');
 
       for (const name of nameList) {
         let vib = numberHelper.calculateNameVibration(name);
