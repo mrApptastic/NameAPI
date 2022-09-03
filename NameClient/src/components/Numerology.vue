@@ -61,7 +61,7 @@ export default {
       const nameList = this.name?.trim().split(' ');
 
       for (const name of nameList) {
-        let vib = numberHelper.calculateNameVibration(name);
+        let vib = numberHelper.calculateNameVibration(name.normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
 
         if (vib < 10) {
           vib += this.baseEnergy;
