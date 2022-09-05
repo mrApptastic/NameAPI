@@ -448,7 +448,7 @@ namespace NameBandit.Data {
                     }
                     
                     var famousPeopleList = new List<string>() { "Elvis", "Clapton", "Armstrong", "Figo", "Pele", "Ronaldo", "Kaka", "Zlatan", "Napoleon", "Rocco", "Guti", 
-                    "Nena", "Cæsar", "Dio", "Ozzy", "Dante", "Camus", "Chaucer", "Cher", "Enya" };
+                    "Nena", "Cæsar", "Dio", "Ozzy", "Dante", "Camus", "Chaucer", "Cher", "Enya", "Delpiero" };
 
                         var famous = new Category() {
                         Title = "Berømte Personer",
@@ -463,7 +463,7 @@ namespace NameBandit.Data {
                     }
 
                     var fictivePeopleList = new List<string>() { "Asterix", "Barbie", "Barnaby", "Obelix", "Sherlock", "Snoopy", "Tintin", "Rocky", "Dolph", "Pixieline", 
-                    "Maverick", "Garfield", "Zorro", "Tarzan", "Eponine", "Gaston", "Belle", "Willow", "Sorcha" };
+                    "Maverick", "Garfield", "Zorro", "Tarzan", "Eponine", "Gaston", "Belle", "Willow", "Sorcha", "Caspian" };
 
                         var fictive = new Category() {
                         Title = "Fiktive Personer",
@@ -491,7 +491,8 @@ namespace NameBandit.Data {
                         }                   
                     }
 
-                    var willyList = new List<string>() { "Willy", "Peter", "Pete", "Diller", "Pik", "Penis", "Wiener" };
+                    var willyList = new List<string>() { "Willy", "Peter", "Pete", "Diller", "Pik", "Penis", "Wiener", "Percy", "Dick", "Dickie", "Dicky", "Prick", 
+                    "Pricky", "Cock", "Cocky", "Dong", "Winkle", "Weenie", "Weener", "Willie" };
 
                         var willies = new Category() {
                         Title = "Falloscentrisk",
@@ -506,7 +507,9 @@ namespace NameBandit.Data {
                     }
 
                     var citiesList = new List<string>() { "Frejlev", "London", "Berlin", "York", "Nice", "Tokyo", "Madrid", "Valencia", "Sevilla", "Roma", "Milan", "Verona", 
-                    "Lyon", "Guldborg", "Boston", "Kingston", "Carlisle", "Lincoln", "Cleveland", "Charlton", "Preston" };
+                    "Lyon", "Guldborg", "Boston", "Kingston", "Carlisle", "Lincoln", "Cleveland", "Charlton", "Preston", "Soho", "Manderup", "Bern", "Sidney", "Sydney", 
+                    "Odessa", "Vienna", "Alexandria", "Lima", "Santiago", "Salvador", "Rosario", "Panama", "Merida", "Belize", "Dallas", "Atlanta", "Orlando", "Denver", 
+                    "Memphis" };
 
                         var cities = new Category() {
                         Title = "Byer",
@@ -536,7 +539,7 @@ namespace NameBandit.Data {
                     }
                     
                     var plantsList = new List<string>() { "Hyben", "Mynte", "Solsikke", "Birk", "Amaryllis", "Hyachint", "Eg", "Viol", "Rose", "Oregano", "Timian", "Persille", 
-                    "Lavendel", "Kløver", "Rosmarin", "Sweetpea", "Orkide", "Mint" };
+                    "Lavendel", "Kløver", "Rosmarin", "Sweetpea", "Orkide", "Mint", "Apple" };
 
                         var plants = new Category() {
                         Title = "Planteriget",
@@ -650,7 +653,7 @@ namespace NameBandit.Data {
                     }
 
                     var justFunnyList = new List<string>() { "Ninja", "Awesome", "Blær", "Dreng", "Charme", "Nitte", "Sok", "Piphat", "Pop", "Fe", "Gift", "Engel", "Offer", 
-                    "Fessor", "Girl", "Guf", "Adduha", "Nisse", "Smiley" };
+                    "Fessor", "Girl", "Guf", "Adduha", "Nisse", "Smiley", "Applepie" };
 
                     var funny = new Category() {
                         Title = "Lutter Sjove Navne",
@@ -669,7 +672,7 @@ namespace NameBandit.Data {
                     "The Man", "Strange Viking", "Strange Willy", "The Willy", "The Viking", "Gordon Gekko", "Tom Barnaby", "John Barnaby", "Nice Pixie", "Pixie Girl", 
                     "Rocket Pixie", "Pixie Bunny", "New York", "Ninja Girl", "Peter Pan", "Snake Eyess", "Joe Dalton", "Ma Dalton", "Ice Man", "John Connor", "Pixie Ninja", 
                     "Sir Lancelot",  "Awesome Boy", "Nice Boy", "Strange Boy", "King Kong", "Indiana Jones", "Wolf Man", "Baba Papa", "Bjørne Bandit", "Fin Raziel", 
-                    "Bonny Lass", "Bonnie Girl", "Sandy Dee" };
+                    "Prince Caspian", "Bonny Lass", "Bonnie Girl", "Sandy Dee", "John Thomas" };
                 
                     foreach (var name in funnyCombinations) {
                         string[] parts = name.Split(' ');
@@ -719,7 +722,7 @@ namespace NameBandit.Data {
                     "Charles Mason", "Jeremiah Dixon", "Thomas Edison", "Boy George", "David Bowie", "Elvis Presley", "Bob Paisley", "Miley Cyrus", "Stevie Wonder", 
                     "Michael Owen", "Salman Rushdi", "Sofie Bonde", "Von Trier", "Kong Ramses", "King Solomon", "Papa Bue", "Mama Cass", "Steven Gerrard", "Smokey Robinson", 
                     "Hugh Grant", "Prince John", "King Richard", "Queen Mary", "Queen Elizabeth", "Prince Charles", "Prince William", "Princess Diana", "Prince Harry", 
-                    "Bonny Tyler", "Lewis Carol", "Don Johnson", "Tom Cruise", "Benjamin Franklin", "Demi More", "Michael Douglas", "Bonnie Prince Charles", "Paris Hilton",
+                    "Bonny Tyler", "Lewis Carol", "Don Johnson", "Tom Cruise", "Benjamin Franklin", "Demi More", "Michael Douglas", "Bonny Prince Charles", "Paris Hilton",
                     "Bryan Adams", "Rod Stewart", "Hans Kirk", "Bille August", "Jack London", "John Milton", "Tom Hanks", "James Barrie", "Robert Scott", "Harper Lee", 
                     "Herman Melville", "Antonio Vivaldi", "Dina Jewel", "Peter North", "Ron Jeremy", "Evan Stone", "Michael Keaton", "Michael Fox", "Bob Marley", "Ruby Dee",
                     "Jim Davis", "Viven Leigh", "Samantha Bee", "Margaret Cho", "Elizabeth Taylor", "Lucy Liu", "Agatha Christie", "George Eliot", "Marie Curie", "Carol King",
