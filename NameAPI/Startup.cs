@@ -45,9 +45,15 @@ namespace NameBandit
                 });
             });
 
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //      options.UseMySql(
+            //          Configuration.GetConnectionString("DefaultConnection")));
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+    
             services.AddDbContext<ApplicationDbContext>(options =>
-                 options.UseMySql(
-                     Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(connectionString, ServerVersion.Parse("10.4.32-mariadb"))
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

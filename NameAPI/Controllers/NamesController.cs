@@ -29,7 +29,7 @@ namespace NameBandit.Controllers
             var names =  await _manager.GetNames(HttpUtility.UrlDecode(matches), HttpUtility.UrlDecode(contains), HttpUtility.UrlDecode(startsWith), HttpUtility.UrlDecode(endsWith), sex, vib, maxLength, minLength, category, page = 1, take = 50);
             var nameList = names.results;
 
-            Response.Headers.Add("X-Count", names.count.ToString());
+            // Response.Headers.Add("X-Count", names.count.ToString());
 
             return Ok(nameList);
         }
