@@ -1,24 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using NameBandit.Models;
 
-namespace NameBandit.Data
+namespace NameBandit.Data;
+
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
-    public class ApplicationDbContext: DbContext {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-            { }
-
-        public DbSet<Name> Names { get; set; }        
-        public DbSet<Category> NameCategories { get; set; }
-        public DbSet<NameCombo> NameCombinations { get; set; }
-        public DbSet<SearchLog> NameSearchLogs { get; set; }  
-        public DbSet<SyncLog> NameSyncLogs { get; set; }
-        public DbSet<VibrationNumber> NameVibrationNumbers { get; set; }
-    }
-}   
-
+    public DbSet<Name> Names { get; set; }
+    public DbSet<Category> NameCategories { get; set; }
+    public DbSet<NameCombo> NameCombinations { get; set; }
+    public DbSet<SearchLog> NameSearchLogs { get; set; }
+    public DbSet<SyncLog> NameSyncLogs { get; set; }
+    public DbSet<VibrationNumber> NameVibrationNumbers { get; set; }
+}

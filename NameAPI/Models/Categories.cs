@@ -1,31 +1,27 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using AutoMapper;
 
-namespace NameBandit.Models 
+namespace NameBandit.Models;
+
+public class Category : CategoryViewModel
 {
-    public class Category : CategoryViewModel
-    {  
-        public ICollection<Name> Names { get; set; }
-    }
+    public ICollection<Name> Names { get; set; } = [];
+}
 
-    public class CategoryViewModel
+public class CategoryViewModel
+{
+    [Key]
+    public int Id { get; set; }
+    public string Title { get; set; } = string.Empty;
+}
+
+public class CategoryProfile : Profile
+{
+    public CategoryProfile()
     {
-        [Key]
-        public int Id {get; set; }
-        public string Title { get; set; }
+        CreateMap<Category, CategoryViewModel>();
+
+        CreateMap<CategoryViewModel, Category>()
+            .ForMember(dest => dest.Names, opts => opts.Ignore());
     }
-
-    public class CategoryProfile: Profile {
-        public CategoryProfile()
-        {            
-            CreateMap<Category, CategoryViewModel>();
-
-            CreateMap<CategoryViewModel, Category>()
-                .ForMember(dest => dest.Names, opts => opts.Ignore());
-        }
-    }  
-    
-}  
+}

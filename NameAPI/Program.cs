@@ -1,26 +1,65 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using NameBandit.Data;
+using NameBandit.Managers;
 
-namespace NameBandit
+var builder = WebApplication.CreateBuilder(args);
+
+// Services
+builder.Services.AddScoped<ICategoriesManager, CategoriesManager>();
+builder.Services.AddScoped<INamesManager, NamesManager>();
+builder.Services.AddScoped<INameCombosManager, NameCombosManager>();
+builder.Services.AddScoped<IVibrationsManager, VibrationsManager>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddCors(c =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
+    c.AddPolicy(
+        name: "AllowOrigin",
+        policy =>
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .WithExposedHeaders("X-Count");
+        });
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseMySql(connectionString!, ServerVersion.AutoDetect(connectionString!))
+);
+
+var app = builder.Build();
+
+// Pipeline
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Names API V1");
+    c.RoutePrefix = string.Empty;
+});
+
+app.UseHttpsRedirection();
+app.UseCors("AllowOrigin");
+app.MapControllers();
+
+// Seed database
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    SeedData.SeedDatabase(context);
+}
+
+app.Run();
+
