@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
+using System.Text.Json;
 using NameBandit.Data;
 using NameBandit.Helpers;
 using NameBandit.Models;
@@ -99,7 +99,7 @@ namespace NameBandit.Controllers
         private static void AddCategories(ApplicationDbContext db) {
 
             string ib = System.IO.File.ReadAllText(@"c:\Temp\categories.json");
-            List<Category> adder = JsonConvert.DeserializeObject<List<Category>>(ib);
+            List<Category> adder = JsonSerializer.Deserialize<List<Category>>(ib);
    
             foreach (Category category in adder) {
                 AddCategory(db, category.Title);

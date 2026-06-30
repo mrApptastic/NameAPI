@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NameBandit.Data;
 using NameBandit.Managers;
@@ -10,7 +11,15 @@ builder.Services.AddScoped<INamesManager, NamesManager>();
 builder.Services.AddScoped<INameCombosManager, NameCombosManager>();
 builder.Services.AddScoped<IVibrationsManager, VibrationsManager>();
 
-builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddSingleton<AutoMapper.IMapper>(provider =>
+{
+    var loggerFactory = provider.GetRequiredService<Microsoft.Extensions.Logging.ILoggerFactory>();
+    var config = new MapperConfiguration(cfg =>
+    {
+        cfg.AddMaps(new[] { typeof(Program).Assembly });
+    }, loggerFactory);
+    return config.CreateMapper();
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
