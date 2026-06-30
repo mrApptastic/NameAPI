@@ -99,7 +99,7 @@ namespace NameBandit.Controllers
         private static void AddCategories(ApplicationDbContext db) {
 
             string ib = System.IO.File.ReadAllText(@"c:\Temp\categories.json");
-            List<Category> adder = JsonSerializer.Deserialize<List<Category>>(ib);
+            List<Category> adder = JsonSerializer.Deserialize<List<Category>>(ib) ?? new List<Category>();
    
             foreach (Category category in adder) {
                 AddCategory(db, category.Title);

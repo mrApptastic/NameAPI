@@ -41,7 +41,7 @@ builder.Services.AddCors(c =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString!, ServerVersion.AutoDetect(connectionString!))
+    options.UseMySql(connectionString!, ServerVersion.Parse("10.4.32-mariadb"))
 );
 
 var app = builder.Build();
